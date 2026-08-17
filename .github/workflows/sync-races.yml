@@ -1,0 +1,75 @@
+name: Sync race data
+
+# Pre-renders every race's charts + metadata and commits them to the repo,
+# so the deployed site serves them as static files instead of doing a live
+# FastF1 load per request — that live load is the one thing that's come
+# close to Render's free-tier 512MB memory limit. See src/plots.py's
+# ensure_race_cached() for the read side of this.
+#
+# Idempotent: a race that's already fully cached is skipped (a couple of
+# Path.exists() checks), so running this repeatedly — every week, or
+# re-running an interrupted backfill — only does work for what's actually
+# missing.
+
+on:
+  schedule:
+    # Every Wednesday, 12:00 UTC. Races run on Sundays; this gives a
+    # couple of days' buffer for official timing corrections to settle.
+    - cron: "0 12 * * 3"
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "Years to sync, space-separated (e.g. '2018 2019'). Leave blank for 2018-current (the full backfill)."
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  # A full 2018-current backfill can run for hours; make sure a scheduled
+  # run during that window queues instead of racing it on the same branch.
+  group: sync-race-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version-file: ".python-version"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Determine years to sync
+        id: years
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.years }}" ]; then
+            echo "list=${{ github.event.inputs.years }}" >> "$GITHUB_OUTPUT"
+          else
+            current_year=$(date -u +%Y)
+            echo "list=$(seq 2018 "$current_year" | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Precache each year, committing progress as it goes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          for year in ${{ steps.years.outputs.list }}; do
+            echo "::group::Year $year"
+            python -m src.precache "$year" || echo "::warning::$year had failures — will retry next run"
+            echo "::endgroup::"
+
+            git add static/plots/
+            if ! git diff --cached --quiet; then
+              git commit -m "Sync race data for $year"
+              git push
+            fi
+          done

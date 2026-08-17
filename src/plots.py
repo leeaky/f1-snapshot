@@ -27,7 +27,16 @@ from matplotlib.collections import LineCollection  # noqa: E402
 from matplotlib.colors import Normalize  # noqa: E402
 
 from . import theme  # noqa: E402
-from .data import PLOTS_DIR, finishing_order, format_laptime, pick_two_fastest  # noqa: E402
+from .data import (  # noqa: E402
+    PLOTS_DIR,
+    build_meta,
+    finishing_order,
+    format_laptime,
+    load_meta,
+    load_race,
+    pick_two_fastest,
+    save_meta,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -288,6 +297,19 @@ def _prune_unused_telemetry(session, keep_driver_numbers: set) -> None:
     gc.collect()
 
 
+def existing_plot_paths(year: int, round_number: int) -> dict[str, Path] | None:
+    """All four image paths if every one already exists on disk, else None.
+
+    Deliberately takes no session — the point is to answer "is this race
+    fully cached?" *before* deciding whether a live FastF1 load (the
+    expensive, memory-heavy path) is needed at all.
+    """
+    paths = {name: _image_path(year, round_number, name) for name in PLOT_NAMES}
+    if all(p.exists() for p in paths.values()):
+        return paths
+    return None
+
+
 def get_or_create_plots(session, year: int, round_number: int) -> dict[str, Path]:
     """Ensure all four chart images exist for this race, generating any missing.
 
@@ -324,3 +346,29 @@ def get_or_create_plots(session, year: int, round_number: int) -> dict[str, Path
         plot_position_changes(session, missing["position_changes"])
 
     return paths
+
+
+def ensure_race_cached(year: int, round_number: int) -> tuple[dict, dict[str, Path]]:
+    """Ensure both metadata and all four charts exist for this race.
+
+    Cache-first: if everything's already on disk, this is a handful of
+    Path.exists()/file reads with no FastF1 involvement at all. Only loads
+    the full race session — the expensive, memory-heavy path that's come
+    close to Render's free-tier limit — when something's actually missing,
+    and whatever that produces gets cached so it's a one-time cost per
+    race, not a per-request one. Shared by the web app and precache.py so
+    both stay cache-first the same way, rather than two copies of this
+    logic drifting apart.
+    """
+    image_paths = existing_plot_paths(year, round_number)
+    meta = load_meta(year, round_number) if image_paths is not None else None
+    if image_paths is not None and meta is not None:
+        logger.info("Already cached: %s round %s, skipping fetch", year, round_number)
+        return meta, image_paths
+
+    session = load_race(year, round_number)
+    image_paths = get_or_create_plots(session, year, round_number)
+    two_fastest = pick_two_fastest(session)
+    meta = build_meta(session, two_fastest)
+    save_meta(year, round_number, meta)
+    return meta, image_paths

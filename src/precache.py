@@ -19,7 +19,7 @@ from datetime import datetime
 import fastf1
 
 from . import plots
-from .data import MIN_YEAR, load_race
+from .data import MIN_YEAR
 
 # Windows consoles default to a legacy codepage that mangles the em dashes
 # used in log messages below (and in FastF1's own logging). UTF-8 output is
@@ -46,10 +46,15 @@ def _rounds_for_season(year: int) -> list[int]:
 
 
 def precache_race(year: int, round_number: int) -> bool:
-    """Warm the cache and generate charts for one race. Returns success."""
+    """Warm the cache and generate charts + metadata for one race.
+
+    Skips the fetch entirely if this race is already fully cached (via the
+    same plots.ensure_race_cached() the web app uses), so running this
+    repeatedly — every week, or re-running an interrupted multi-hour
+    backfill — is cheap for anything already done.
+    """
     try:
-        session = load_race(year, round_number)
-        plots.get_or_create_plots(session, year, round_number)
+        plots.ensure_race_cached(year, round_number)
     except Exception:
         logger.exception("Failed to precache %s round %s", year, round_number)
         return False

@@ -8,6 +8,7 @@ trace comparison.
 
 from __future__ import annotations
 
+import json
 import logging
 from pathlib import Path
 
@@ -89,6 +90,57 @@ def pick_two_fastest(session: fastf1.core.Session) -> list[fastf1.core.Lap]:
         format_laptime(candidates[1]["LapTime"]),
     )
     return candidates[:2]
+
+
+def build_meta(session: fastf1.core.Session, two_fastest: list[fastf1.core.Lap]) -> dict:
+    """Assemble the small, JSON-serializable summary shown in the page header.
+
+    Kept separate from the live Session object specifically so it can be
+    cached to disk (see save_meta/load_meta) — reading this back is what
+    lets a re-visited race skip a full FastF1 load entirely, not just skip
+    re-drawing the charts.
+    """
+    winner = session.results.iloc[0]
+    full_name = winner.get("FullName")
+    winner_name = (
+        full_name if isinstance(full_name, str) and full_name else winner["Abbreviation"]
+    )
+    return {
+        "event_name": session.event["EventName"],
+        "location": session.event["Location"],
+        "date": session.event["EventDate"].strftime("%d %B %Y"),
+        "winner_name": winner_name,
+        "fastest": [
+            {"abbr": lap["Driver"], "time": format_laptime(lap["LapTime"])}
+            for lap in two_fastest
+        ],
+    }
+
+
+def _meta_path(year: int, round_number: int) -> Path:
+    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
+    return PLOTS_DIR / f"{year}_{round_number:02d}_meta.json"
+
+
+def save_meta(year: int, round_number: int, meta: dict) -> None:
+    _meta_path(year, round_number).write_text(json.dumps(meta, indent=2), encoding="utf-8")
+
+
+def load_meta(year: int, round_number: int) -> dict | None:
+    """Cached meta for this race, or None if it hasn't been built yet.
+
+    A corrupt cache file is treated the same as a missing one (log and
+    recompute) rather than raised — the same self-healing-cache reasoning
+    as a missing image file, not an error worth failing the page over.
+    """
+    path = _meta_path(year, round_number)
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        logger.warning("Corrupt meta cache at %s, ignoring", path)
+        return None
 
 
 def finishing_order(session: fastf1.core.Session) -> list[str]:

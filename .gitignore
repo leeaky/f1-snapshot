@@ -6,8 +6,9 @@ config/
 # FastF1 disk cache (large, regenerable)
 cache/
 
-# Generated chart images (regenerable)
-static/plots/*.png
+# static/plots/*.png and *_meta.json are intentionally NOT ignored: the
+# weekly GitHub Actions sync commits them so Render serves pre-rendered
+# races as static files instead of doing a live FastF1 load per request.
 
 # Python
 __pycache__/

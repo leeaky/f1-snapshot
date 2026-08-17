@@ -14,7 +14,7 @@ import fastf1
 from flask import Flask, abort, jsonify, render_template
 
 from . import plots
-from .data import MIN_YEAR, REPO_ROOT, format_laptime, load_race, pick_two_fastest
+from .data import MIN_YEAR, REPO_ROOT
 
 # Windows consoles default to a legacy codepage that mangles the em dashes
 # used in a few log/exception messages (and in FastF1's own logging).
@@ -85,14 +85,12 @@ def race(year: int, round_number: int):
         abort(404)
 
     try:
-        session = load_race(year, round_number)
-        image_paths = plots.get_or_create_plots(session, year, round_number)
-        two_fastest = pick_two_fastest(session)
-        winner = session.results.iloc[0]
-        full_name = winner.get("FullName")
-        winner_name = (
-            full_name if isinstance(full_name, str) and full_name else winner["Abbreviation"]
-        )
+        # Cache-first (see plots.ensure_race_cached): a fully-synced race —
+        # see the weekly GitHub Actions job — is served with no FastF1
+        # involvement at all. Only a race that's never been synced falls
+        # back to a live load, which is the one thing on this route that's
+        # come close to Render's free-tier memory limit.
+        meta, image_paths = plots.ensure_race_cached(year, round_number)
     except Exception:
         logger.exception(
             "Failed to build race snapshot for %s round %s", year, round_number
@@ -106,14 +104,7 @@ def race(year: int, round_number: int):
         "years": _selectable_years(),
         "year": year,
         "round_number": round_number,
-        "event_name": session.event["EventName"],
-        "location": session.event["Location"],
-        "date": session.event["EventDate"].strftime("%d %B %Y"),
-        "winner_name": winner_name,
-        "fastest": [
-            {"abbr": lap["Driver"], "time": format_laptime(lap["LapTime"])}
-            for lap in two_fastest
-        ],
+        **meta,
         "images": {name: f"/static/plots/{p.name}" for name, p in image_paths.items()},
     }
     return render_template("race.html", **context)
