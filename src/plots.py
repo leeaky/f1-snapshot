@@ -20,6 +20,7 @@ import gc  # noqa: E402
 import logging  # noqa: E402
 from pathlib import Path  # noqa: E402
 
+import fastf1.mvapi  # noqa: E402
 import fastf1.plotting  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
@@ -34,6 +35,7 @@ from .data import (  # noqa: E402
     format_laptime,
     load_meta,
     load_race,
+    pick_fastest_with_telemetry,
     pick_two_fastest,
     save_meta,
 )
@@ -63,9 +65,31 @@ def _rotate(xy: np.ndarray, angle: float) -> np.ndarray:
     return np.matmul(xy, rot_mat)
 
 
-def plot_track_map(session, fastest_lap, path: Path) -> None:
+def _circuit_info_without_reference_lap(session) -> fastf1.mvapi.CircuitInfo:
+    """session.get_circuit_info(), minus the part that needs a reference lap.
+
+    That method internally does `self.laps.pick_fastest()` — the
+    session's own overall fastest lap, not configurable — purely to
+    compute a 'Distance' column on the corners/marshal dataframes via
+    add_marker_distance(). Nothing this app uses (.rotation, .corners'
+    Number/Letter/Angle/X/Y) depends on that column; it's already fully
+    populated by the lower-level call below, before add_marker_distance()
+    would even run. Calling that lower-level function directly sidesteps
+    a real crash when the internal reference lap belongs to a driver with
+    no position data at all — entirely, regardless of which driver that
+    is, since this never touches telemetry.
+    """
+    circuit_key = session.session_info["Meeting"]["Circuit"]["Key"]
+    if (
+        circuit_key == 149
+        and session.session_info["Meeting"]["Circuit"]["ShortName"] == "Mugello"
+    ):
+        circuit_key = 146  # same special-case FastF1's own method applies
+    return fastf1.mvapi.get_circuit_info(year=session.event.year, circuit_key=circuit_key)
+
+
+def plot_track_map(circuit_info, fastest_lap, path: Path) -> None:
     """Track outline colored by speed, with numbered corners, from the fastest lap."""
-    circuit_info = session.get_circuit_info()
     tel = fastest_lap.get_telemetry()
     track = tel.loc[:, ("X", "Y")].to_numpy()
     speed = tel["Speed"].to_numpy()
@@ -359,33 +383,48 @@ def get_or_create_plots(session, year: int, round_number: int) -> dict[str, Path
         len(missing), year, round_number, list(missing),
     )
 
-    two_fastest = None
+    # Factual fastest lap(s) — telemetry-agnostic, used only as a fallback
+    # placeholder title if a telemetry-aware pick below comes up short.
+    # NOT what gets plotted: see pick_fastest_with_telemetry.
+    overall_fastest = None
     if "track_map" in missing or "speed_traces" in missing:
-        two_fastest = pick_two_fastest(session)
+        overall_fastest = pick_two_fastest(session)
+
+    used_driver_numbers: set = set()
 
     if "track_map" in missing:
         try:
-            plot_track_map(session, two_fastest[0], missing["track_map"])
+            track_lap = pick_fastest_with_telemetry(session, session.pos_data, count=1)
+            if not track_lap:
+                raise ValueError("no driver has position telemetry for this session")
+            used_driver_numbers.add(track_lap[0]["DriverNumber"])
+            circuit_info = _circuit_info_without_reference_lap(session)
+            plot_track_map(circuit_info, track_lap[0], missing["track_map"])
         except Exception:
-            # Missing position telemetry for FastF1's own internal reference
-            # lap (get_circuit_info() picks it, not configurable) — real,
-            # not rare enough to ignore, and shouldn't take the other three
-            # charts down with it. A placeholder still satisfies "this race
-            # is fully cached" so it isn't retried (and re-failed) on every
-            # visit.
+            # Whole-session position-data gaps do happen (older seasons
+            # especially) — not rare enough to ignore, and shouldn't take
+            # the other three charts down with it. A placeholder still
+            # satisfies "this race is fully cached" so it isn't retried
+            # (and re-failed) on every visit.
             logger.exception(
                 "Track map unavailable for %s round %s, using placeholder",
                 year, round_number,
             )
-            title = f"{two_fastest[0]['Driver']} — {format_laptime(two_fastest[0]['LapTime'])}"
+            fallback = overall_fastest[0]
+            title = f"{fallback['Driver']} — {format_laptime(fallback['LapTime'])}"
             _unavailable_placeholder(
                 missing["track_map"],
                 "Track map unavailable for this race\n(no position data recorded)",
                 title=title,
             )
+
     if "speed_traces" in missing:
         try:
-            plot_speed_traces(session, two_fastest, missing["speed_traces"])
+            speed_laps = pick_fastest_with_telemetry(session, session.car_data, count=2)
+            if len(speed_laps) < 2:
+                raise ValueError("fewer than two drivers have car telemetry for this session")
+            used_driver_numbers.update(lap["DriverNumber"] for lap in speed_laps)
+            plot_speed_traces(session, speed_laps, missing["speed_traces"])
         except Exception:
             # Same shape of gap as the track map, but in car data (speed/
             # throttle) instead of position — independent telemetry stream,
@@ -398,9 +437,9 @@ def get_or_create_plots(session, year: int, round_number: int) -> dict[str, Path
                 missing["speed_traces"],
                 "Speed comparison unavailable for this race\n(car telemetry missing for at least one driver)",
             )
-    if two_fastest is not None:
-        needed = {lap["DriverNumber"] for lap in two_fastest}
-        _prune_unused_telemetry(session, needed)
+
+    if used_driver_numbers:
+        _prune_unused_telemetry(session, used_driver_numbers)
     if "strategy" in missing:
         plot_strategy(session, missing["strategy"])
     if "position_changes" in missing:

@@ -61,19 +61,31 @@ def format_laptime(delta: pd.Timedelta) -> str:
     return f"{minutes}:{seconds:06.3f}"
 
 
-def pick_two_fastest(session: fastf1.core.Session) -> list[fastf1.core.Lap]:
-    """Return the two drivers with the quickest individual race laps.
-
-    Quickest first. This is each driver's personal-best lap, compared across
-    drivers — not simply the two quickest rows, which could both belong to
-    the same driver if they set their two fastest laps back to back.
-    """
+def _fastest_laps_by_driver(session: fastf1.core.Session) -> list[fastf1.core.Lap]:
+    """Every driver's personal-best lap this session, fastest first."""
     candidates: list[fastf1.core.Lap] = []
     for drv in session.drivers:
         lap = session.laps.pick_drivers(drv).pick_fastest()
         if lap is None or pd.isna(lap["LapTime"]):
             continue
         candidates.append(lap)
+    candidates.sort(key=lambda lap: lap["LapTime"])
+    return candidates
+
+
+def pick_two_fastest(session: fastf1.core.Session) -> list[fastf1.core.Lap]:
+    """Return the two drivers with the quickest individual race laps.
+
+    Quickest first. This is each driver's personal-best lap, compared across
+    drivers — not simply the two quickest rows, which could both belong to
+    the same driver if they set their two fastest laps back to back.
+
+    Deliberately telemetry-agnostic: this is the *factual* fastest lap of
+    the race, used for the page header/metadata, and should stay accurate
+    even for a driver whose telemetry can't be plotted. See
+    pick_fastest_with_telemetry() for the chart-plotting equivalent.
+    """
+    candidates = _fastest_laps_by_driver(session)
 
     if len(candidates) < 2:
         raise ValueError(
@@ -81,7 +93,6 @@ def pick_two_fastest(session: fastf1.core.Session) -> list[fastf1.core.Lap]:
             f"{session.event['EventName']} {session.event.year} — need 2"
         )
 
-    candidates.sort(key=lambda lap: lap["LapTime"])
     logger.info(
         "Two fastest: %s (%s) and %s (%s)",
         candidates[0]["Driver"],
@@ -90,6 +101,32 @@ def pick_two_fastest(session: fastf1.core.Session) -> list[fastf1.core.Lap]:
         format_laptime(candidates[1]["LapTime"]),
     )
     return candidates[:2]
+
+
+def pick_fastest_with_telemetry(
+    session: fastf1.core.Session, telemetry: dict, count: int
+) -> list[fastf1.core.Lap]:
+    """The `count` fastest laps among drivers who actually have this
+    telemetry stream — skipping any who don't, in favor of the
+    next-fastest driver who does.
+
+    `telemetry` is session.car_data or session.pos_data: FastF1 fetches
+    car (speed/throttle) and position (X/Y) data as independent streams,
+    and either can be missing for a driver entirely (not just incomplete)
+    on older data especially. A fast-but-unplottable lap is useless to a
+    chart that needs to actually draw the telemetry, unlike
+    pick_two_fastest()'s factual "what really was the fastest lap" — so
+    this is the one to use for chart data, not for reporting a time.
+
+    May return fewer than `count` laps if not enough drivers have this
+    telemetry; callers already treat that as "can't build this chart" via
+    the same fallback path as any other plotting failure.
+    """
+    candidates = [
+        lap for lap in _fastest_laps_by_driver(session)
+        if lap["DriverNumber"] in telemetry
+    ]
+    return candidates[:count]
 
 
 def build_meta(session: fastf1.core.Session, two_fastest: list[fastf1.core.Lap]) -> dict:
