@@ -1,0 +1,16 @@
+{
+  "event_name": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "09 October 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "ZHO",
+      "time": "1:44.411"
+    },
+    {
+      "abbr": "ALO",
+      "time": "1:44.412"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "10 April 2022",
+  "winner_name": "Charles Leclerc",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:20.260"
+    },
+    {
+      "abbr": "ALO",
+      "time": "1:20.846"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "12 June 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "PER",
+      "time": "1:46.046"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:46.050"
+    }
+  ]
+}

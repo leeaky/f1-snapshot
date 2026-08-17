@@ -1,0 +1,16 @@
+{
+  "event_name": "Mexico City Grand Prix",
+  "location": "Mexico City",
+  "date": "30 October 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "RUS",
+      "time": "1:20.153"
+    },
+    {
+      "abbr": "PER",
+      "time": "1:21.775"
+    }
+  ]
+}

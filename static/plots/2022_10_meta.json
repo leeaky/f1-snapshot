@@ -1,0 +1,16 @@
+{
+  "event_name": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "03 July 2022",
+  "winner_name": "Carlos Sainz",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:30.510"
+    },
+    {
+      "abbr": "SAI",
+      "time": "1:30.813"
+    }
+  ]
+}

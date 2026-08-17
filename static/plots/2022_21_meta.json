@@ -1,0 +1,16 @@
+{
+  "event_name": "S\u00e3o Paulo Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "13 November 2022",
+  "winner_name": "George Russell",
+  "fastest": [
+    {
+      "abbr": "RUS",
+      "time": "1:13.785"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:13.942"
+    }
+  ]
+}

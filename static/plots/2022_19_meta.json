@@ -1,0 +1,16 @@
+{
+  "event_name": "United States Grand Prix",
+  "location": "Austin",
+  "date": "23 October 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "RUS",
+      "time": "1:38.788"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:39.541"
+    }
+  ]
+}

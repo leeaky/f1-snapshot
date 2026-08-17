@@ -1,0 +1,16 @@
+{
+  "event_name": "French Grand Prix",
+  "location": "Le Castellet",
+  "date": "24 July 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "SAI",
+      "time": "1:35.781"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:37.491"
+    }
+  ]
+}

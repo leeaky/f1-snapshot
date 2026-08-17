@@ -1,0 +1,16 @@
+{
+  "event_name": "Bahrain Grand Prix",
+  "location": "Sakhir",
+  "date": "20 March 2022",
+  "winner_name": "Charles Leclerc",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:34.570"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:35.440"
+    }
+  ]
+}

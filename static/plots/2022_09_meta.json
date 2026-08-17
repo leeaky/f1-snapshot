@@ -1,0 +1,16 @@
+{
+  "event_name": "Canadian Grand Prix",
+  "location": "Montr\u00e9al",
+  "date": "19 June 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "SAI",
+      "time": "1:15.749"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:15.839"
+    }
+  ]
+}

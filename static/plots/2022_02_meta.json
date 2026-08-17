@@ -1,0 +1,16 @@
+{
+  "event_name": "Saudi Arabian Grand Prix",
+  "location": "Jeddah",
+  "date": "27 March 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:31.634"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:31.772"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "10 July 2022",
+  "winner_name": "Charles Leclerc",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:07.275"
+    },
+    {
+      "abbr": "LEC",
+      "time": "1:07.583"
+    }
+  ]
+}
