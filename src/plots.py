@@ -44,7 +44,6 @@ logger = logging.getLogger(__name__)
 
 DPI = 200
 PLOT_NAMES = ("track_map", "speed_traces", "strategy", "position_changes")
-COMPOUND_ORDER = ("SOFT", "MEDIUM", "HARD", "INTERMEDIATE", "WET")
 
 
 def _image_path(year: int, round_number: int, name: str) -> Path:
@@ -242,11 +241,17 @@ def plot_strategy(session, path: Path) -> None:
             )
             previous_stint_end += row["StintLength"]
 
-    # Only real compounds belong in the legend — an anomalous "NONE" entry
-    # would read as a mystery fifth tyre choice rather than what it is.
+    # Only real compounds belong in the legend — an anomalous "NONE"/NaN
+    # entry would read as a mystery tyre choice rather than what it is.
+    # list_compounds() is era-aware: 2018-2021 raced a 5-tier dry lineup
+    # (hyper/ultra/super/soft/medium/hard) rather than 2022+'s soft/medium/
+    # hard, so this can't be a fixed constant without silently dropping
+    # legitimate historical compounds from the legend — they'd still get
+    # a correct bar color from _compound_color, just no legend entry.
+    known_compounds = fastf1.plotting.list_compounds(session)
     compounds_used = sorted(
-        (c for c in stints["Compound"].unique() if c in COMPOUND_ORDER),
-        key=COMPOUND_ORDER.index,
+        (c for c in stints["Compound"].unique() if c in known_compounds),
+        key=known_compounds.index,
     )
     if compounds_used:
         # matplotlib's legend() rejects ncol=0 outright — if a whole race's
