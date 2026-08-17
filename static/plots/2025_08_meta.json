@@ -1,0 +1,16 @@
+{
+  "event_name": "Monaco Grand Prix",
+  "location": "Monaco",
+  "date": "25 May 2025",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:13.221"
+    },
+    {
+      "abbr": "RUS",
+      "time": "1:13.405"
+    }
+  ]
+}

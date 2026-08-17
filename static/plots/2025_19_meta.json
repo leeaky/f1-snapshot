@@ -1,0 +1,16 @@
+{
+  "event_name": "United States Grand Prix",
+  "location": "Austin",
+  "date": "19 October 2025",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "ANT",
+      "time": "1:37.577"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:37.620"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "29 June 2025",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "PIA",
+      "time": "1:07.924"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:08.272"
+    }
+  ]
+}

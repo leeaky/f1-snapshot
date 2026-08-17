@@ -1,0 +1,16 @@
+{
+  "event_name": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "16 March 2025",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:22.167"
+    },
+    {
+      "abbr": "LAW",
+      "time": "1:22.970"
+    }
+  ]
+}

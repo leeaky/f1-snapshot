@@ -1,0 +1,16 @@
+{
+  "event_name": "Qatar Grand Prix",
+  "location": "Lusail",
+  "date": "30 November 2025",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "PIA",
+      "time": "1:22.996"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:23.197"
+    }
+  ]
+}

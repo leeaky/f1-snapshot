@@ -1,0 +1,16 @@
+{
+  "event_name": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "06 July 2025",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "PIA",
+      "time": "1:29.337"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:29.734"
+    }
+  ]
+}

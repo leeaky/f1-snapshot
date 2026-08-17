@@ -1,0 +1,16 @@
+{
+  "event_name": "Chinese Grand Prix",
+  "location": "Shanghai",
+  "date": "23 March 2025",
+  "winner_name": "Oscar Piastri",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:35.069"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:35.454"
+    }
+  ]
+}

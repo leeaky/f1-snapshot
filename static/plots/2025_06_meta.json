@@ -1,0 +1,16 @@
+{
+  "event_name": "Miami Grand Prix",
+  "location": "Miami Gardens",
+  "date": "04 May 2025",
+  "winner_name": "Oscar Piastri",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:29.746"
+    },
+    {
+      "abbr": "PIA",
+      "time": "1:29.822"
+    }
+  ]
+}

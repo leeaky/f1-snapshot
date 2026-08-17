@@ -1,0 +1,16 @@
+{
+  "event_name": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "06 April 2025",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "ANT",
+      "time": "1:30.965"
+    },
+    {
+      "abbr": "PIA",
+      "time": "1:31.039"
+    }
+  ]
+}

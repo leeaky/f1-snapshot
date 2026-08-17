@@ -1,0 +1,16 @@
+{
+  "event_name": "Singapore Grand Prix",
+  "location": "Marina Bay",
+  "date": "05 October 2025",
+  "winner_name": "George Russell",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:33.808"
+    },
+    {
+      "abbr": "GAS",
+      "time": "1:34.573"
+    }
+  ]
+}
