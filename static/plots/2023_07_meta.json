@@ -1,0 +1,16 @@
+{
+  "event_name": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "04 June 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:16.330"
+    },
+    {
+      "abbr": "PER",
+      "time": "1:16.666"
+    }
+  ]
+}

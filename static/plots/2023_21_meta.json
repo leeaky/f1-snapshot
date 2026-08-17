@@ -1,0 +1,16 @@
+{
+  "event_name": "Las Vegas Grand Prix",
+  "location": "Las Vegas",
+  "date": "18 November 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "PIA",
+      "time": "1:35.490"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:35.614"
+    }
+  ]
+}

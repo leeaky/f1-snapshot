@@ -1,0 +1,16 @@
+{
+  "event_name": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "02 April 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "PER",
+      "time": "1:20.235"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:20.342"
+    }
+  ]
+}

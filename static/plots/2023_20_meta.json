@@ -1,0 +1,16 @@
+{
+  "event_name": "S\u00e3o Paulo Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "05 November 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:12.486"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:13.422"
+    }
+  ]
+}

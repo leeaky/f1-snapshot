@@ -1,0 +1,16 @@
+{
+  "event_name": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "03 September 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "PIA",
+      "time": "1:25.072"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:25.240"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "23 July 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:20.504"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:21.601"
+    }
+  ]
+}

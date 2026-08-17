@@ -1,0 +1,16 @@
+{
+  "event_name": "Miami Grand Prix",
+  "location": "Miami",
+  "date": "07 May 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:29.708"
+    },
+    {
+      "abbr": "ALO",
+      "time": "1:30.519"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Singapore Grand Prix",
+  "location": "Marina Bay",
+  "date": "17 September 2023",
+  "winner_name": "Carlos Sainz",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:35.867"
+    },
+    {
+      "abbr": "RUS",
+      "time": "1:36.273"
+    }
+  ]
+}

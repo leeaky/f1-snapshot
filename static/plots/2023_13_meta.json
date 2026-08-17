@@ -1,0 +1,16 @@
+{
+  "event_name": "Dutch Grand Prix",
+  "location": "Zandvoort",
+  "date": "27 August 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "ALO",
+      "time": "1:13.837"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:13.889"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Monaco Grand Prix",
+  "location": "Monaco",
+  "date": "28 May 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:15.650"
+    },
+    {
+      "abbr": "LEC",
+      "time": "1:15.773"
+    }
+  ]
+}

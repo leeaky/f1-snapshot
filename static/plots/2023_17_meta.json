@@ -1,0 +1,16 @@
+{
+  "event_name": "Qatar Grand Prix",
+  "location": "Lusail",
+  "date": "08 October 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:24.319"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:24.842"
+    }
+  ]
+}
