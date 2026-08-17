@@ -1,0 +1,16 @@
+{
+  "event_name": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "14 July 2019",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:27.369"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:27.406"
+    }
+  ]
+}

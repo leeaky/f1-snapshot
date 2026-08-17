@@ -1,0 +1,16 @@
+{
+  "event_name": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "28 April 2019",
+  "winner_name": "Valtteri Bottas",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:43.009"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:44.024"
+    }
+  ]
+}

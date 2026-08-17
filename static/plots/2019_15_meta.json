@@ -1,0 +1,16 @@
+{
+  "event_name": "Singapore Grand Prix",
+  "location": "Singapore",
+  "date": "22 September 2019",
+  "winner_name": "Sebastian Vettel",
+  "fastest": [
+    {
+      "abbr": "MAG",
+      "time": "1:42.301"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:43.534"
+    }
+  ]
+}

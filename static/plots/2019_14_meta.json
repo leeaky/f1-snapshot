@@ -1,0 +1,16 @@
+{
+  "event_name": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "08 September 2019",
+  "winner_name": "Charles Leclerc",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:21.779"
+    },
+    {
+      "abbr": "VET",
+      "time": "1:22.799"
+    }
+  ]
+}

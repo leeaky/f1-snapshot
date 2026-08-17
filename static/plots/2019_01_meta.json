@@ -1,0 +1,16 @@
+{
+  "event_name": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "17 March 2019",
+  "winner_name": "Valtteri Bottas",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:25.580"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:26.057"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "01 September 2019",
+  "winner_name": "Charles Leclerc",
+  "fastest": [
+    {
+      "abbr": "VET",
+      "time": "1:46.409"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:46.465"
+    }
+  ]
+}

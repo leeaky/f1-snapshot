@@ -1,0 +1,16 @@
+{
+  "event_name": "Mexican Grand Prix",
+  "location": "Mexico City",
+  "date": "27 October 2019",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:19.232"
+    },
+    {
+      "abbr": "ALB",
+      "time": "1:19.325"
+    }
+  ]
+}

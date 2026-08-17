@@ -1,0 +1,16 @@
+{
+  "event_name": "Chinese Grand Prix",
+  "location": "Shanghai",
+  "date": "14 April 2019",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "GAS",
+      "time": "1:34.742"
+    },
+    {
+      "abbr": "VET",
+      "time": "1:34.836"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "13 October 2019",
+  "winner_name": "Valtteri Bottas",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:30.983"
+    },
+    {
+      "abbr": "LEC",
+      "time": "1:31.611"
+    }
+  ]
+}

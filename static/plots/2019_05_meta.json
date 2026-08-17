@@ -1,0 +1,16 @@
+{
+  "event_name": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "12 May 2019",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:18.492"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:18.737"
+    }
+  ]
+}

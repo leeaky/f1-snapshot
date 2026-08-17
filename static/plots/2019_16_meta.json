@@ -1,0 +1,16 @@
+{
+  "event_name": "Russian Grand Prix",
+  "location": "Sochi",
+  "date": "29 September 2019",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:35.761"
+    },
+    {
+      "abbr": "LEC",
+      "time": "1:36.193"
+    }
+  ]
+}

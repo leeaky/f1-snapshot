@@ -1,0 +1,16 @@
+{
+  "event_name": "United States Grand Prix",
+  "location": "Austin",
+  "date": "03 November 2019",
+  "winner_name": "Valtteri Bottas",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:36.169"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:36.957"
+    }
+  ]
+}

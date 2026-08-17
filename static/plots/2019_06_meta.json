@@ -1,0 +1,16 @@
+{
+  "event_name": "Monaco Grand Prix",
+  "location": "Monte Carlo",
+  "date": "26 May 2019",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "GAS",
+      "time": "1:14.279"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:15.163"
+    }
+  ]
+}
