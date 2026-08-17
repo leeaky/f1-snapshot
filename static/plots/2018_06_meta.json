@@ -1,0 +1,16 @@
+{
+  "event_name": "Monaco Grand Prix",
+  "location": "Monte Carlo",
+  "date": "27 May 2018",
+  "winner_name": "Daniel Ricciardo",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:14.260"
+    },
+    {
+      "abbr": "GRO",
+      "time": "1:14.822"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Abu Dhabi Grand Prix",
+  "location": "Yas Marina",
+  "date": "25 November 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "VET",
+      "time": "1:40.867"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:40.953"
+    }
+  ]
+}

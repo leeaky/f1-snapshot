@@ -1,0 +1,16 @@
+{
+  "event_name": "Mexican Grand Prix",
+  "location": "Mexico City",
+  "date": "28 October 2018",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:18.741"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:19.186"
+    }
+  ]
+}
