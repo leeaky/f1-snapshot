@@ -4,3 +4,9 @@ matplotlib>=3.8
 numpy>=1.26
 pandas>=2.2
 python-dotenv>=1.0
+
+# Production WSGI server for the Render deployment. Unix-only (imports the
+# stdlib fcntl module at startup) — installs fine on Windows but can't run
+# there, so it's excluded from the local dev environment. Local runs always
+# use `flask run` instead; see context.md.
+gunicorn>=23.0; sys_platform != "win32"
