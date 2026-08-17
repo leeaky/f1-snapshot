@@ -1,0 +1,16 @@
+{
+  "event_name": "Portuguese Grand Prix",
+  "location": "Portim\u00e3o",
+  "date": "02 May 2021",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:19.865"
+    },
+    {
+      "abbr": "PER",
+      "time": "1:20.643"
+    }
+  ]
+}

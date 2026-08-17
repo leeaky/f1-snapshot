@@ -1,0 +1,16 @@
+{
+  "event_name": "S\u00e3o Paulo Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "14 November 2021",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "PER",
+      "time": "1:11.010"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:11.982"
+    }
+  ]
+}

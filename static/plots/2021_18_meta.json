@@ -1,0 +1,16 @@
+{
+  "event_name": "Mexico City Grand Prix",
+  "location": "Mexico City",
+  "date": "07 November 2021",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:17.774"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:18.999"
+    }
+  ]
+}

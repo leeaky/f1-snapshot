@@ -1,0 +1,16 @@
+{
+  "event_name": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "12 September 2021",
+  "winner_name": "Daniel Ricciardo",
+  "fastest": [
+    {
+      "abbr": "RIC",
+      "time": "1:24.812"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:24.827"
+    }
+  ]
+}

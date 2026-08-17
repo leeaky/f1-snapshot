@@ -1,0 +1,16 @@
+{
+  "event_name": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "09 May 2021",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:18.149"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:19.430"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Turkish Grand Prix",
+  "location": "Istanbul",
+  "date": "10 October 2021",
+  "winner_name": "Valtteri Bottas",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:30.432"
+    },
+    {
+      "abbr": "SAI",
+      "time": "1:31.921"
+    }
+  ]
+}

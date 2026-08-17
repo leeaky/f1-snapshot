@@ -1,0 +1,16 @@
+{
+  "event_name": "French Grand Prix",
+  "location": "Le Castellet",
+  "date": "20 June 2021",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:36.404"
+    },
+    {
+      "abbr": "PER",
+      "time": "1:36.693"
+    }
+  ]
+}

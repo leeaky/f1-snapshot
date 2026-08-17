@@ -1,0 +1,16 @@
+{
+  "event_name": "Russian Grand Prix",
+  "location": "Sochi",
+  "date": "26 September 2021",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:37.423"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:37.575"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Emilia Romagna Grand Prix",
+  "location": "Imola",
+  "date": "18 April 2021",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:16.702"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:17.524"
+    }
+  ]
+}

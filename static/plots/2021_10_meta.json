@@ -1,0 +1,16 @@
+{
+  "event_name": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "18 July 2021",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "PER",
+      "time": "1:28.617"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:29.699"
+    }
+  ]
+}

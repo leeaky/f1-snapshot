@@ -1,0 +1,16 @@
+{
+  "event_name": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "01 August 2021",
+  "winner_name": "Esteban Ocon",
+  "fastest": [
+    {
+      "abbr": "GAS",
+      "time": "1:18.394"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:18.715"
+    }
+  ]
+}

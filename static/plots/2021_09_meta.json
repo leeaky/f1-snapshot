@@ -1,0 +1,16 @@
+{
+  "event_name": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "04 July 2021",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:06.200"
+    },
+    {
+      "abbr": "SAI",
+      "time": "1:07.762"
+    }
+  ]
+}

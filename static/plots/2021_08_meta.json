@@ -1,0 +1,16 @@
+{
+  "event_name": "Styrian Grand Prix",
+  "location": "Spielberg",
+  "date": "27 June 2021",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:07.058"
+    },
+    {
+      "abbr": "PER",
+      "time": "1:07.894"
+    }
+  ]
+}

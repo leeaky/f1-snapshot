@@ -1,0 +1,16 @@
+{
+  "event_name": "Qatar Grand Prix",
+  "location": "Lusail",
+  "date": "21 November 2021",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:23.196"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:25.084"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Monaco Grand Prix",
+  "location": "Monte Carlo",
+  "date": "23 May 2021",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:12.909"
+    },
+    {
+      "abbr": "TSU",
+      "time": "1:14.037"
+    }
+  ]
+}
