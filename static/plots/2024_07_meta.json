@@ -1,0 +1,16 @@
+{
+  "event_name": "Emilia Romagna Grand Prix",
+  "location": "Imola",
+  "date": "19 May 2024",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "RUS",
+      "time": "1:18.589"
+    },
+    {
+      "abbr": "ALO",
+      "time": "1:19.004"
+    }
+  ]
+}

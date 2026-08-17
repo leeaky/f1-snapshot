@@ -1,0 +1,16 @@
+{
+  "event_name": "Miami Grand Prix",
+  "location": "Miami",
+  "date": "05 May 2024",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "PIA",
+      "time": "1:30.634"
+    },
+    {
+      "abbr": "ALB",
+      "time": "1:30.849"
+    }
+  ]
+}

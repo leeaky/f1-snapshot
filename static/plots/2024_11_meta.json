@@ -1,0 +1,16 @@
+{
+  "event_name": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "30 June 2024",
+  "winner_name": "George Russell",
+  "fastest": [
+    {
+      "abbr": "ALO",
+      "time": "1:07.694"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:07.719"
+    }
+  ]
+}

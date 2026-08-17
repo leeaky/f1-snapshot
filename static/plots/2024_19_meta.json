@@ -1,0 +1,16 @@
+{
+  "event_name": "United States Grand Prix",
+  "location": "Austin",
+  "date": "20 October 2024",
+  "winner_name": "Charles Leclerc",
+  "fastest": [
+    {
+      "abbr": "OCO",
+      "time": "1:37.330"
+    },
+    {
+      "abbr": "COL",
+      "time": "1:37.611"
+    }
+  ]
+}

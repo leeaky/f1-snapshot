@@ -1,0 +1,16 @@
+{
+  "event_name": "Saudi Arabian Grand Prix",
+  "location": "Jeddah",
+  "date": "09 March 2024",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:31.632"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:31.746"
+    }
+  ]
+}

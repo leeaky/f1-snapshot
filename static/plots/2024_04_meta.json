@@ -1,0 +1,16 @@
+{
+  "event_name": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "07 April 2024",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:33.706"
+    },
+    {
+      "abbr": "SAI",
+      "time": "1:33.841"
+    }
+  ]
+}

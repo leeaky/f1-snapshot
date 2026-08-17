@@ -1,0 +1,16 @@
+{
+  "event_name": "Canadian Grand Prix",
+  "location": "Montr\u00e9al",
+  "date": "09 June 2024",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:14.856"
+    },
+    {
+      "abbr": "RUS",
+      "time": "1:14.895"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "07 July 2024",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "SAI",
+      "time": "1:28.293"
+    },
+    {
+      "abbr": "PIA",
+      "time": "1:28.748"
+    }
+  ]
+}

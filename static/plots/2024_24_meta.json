@@ -1,0 +1,16 @@
+{
+  "event_name": "Abu Dhabi Grand Prix",
+  "location": "Yas Island",
+  "date": "08 December 2024",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "MAG",
+      "time": "1:25.637"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:27.278"
+    }
+  ]
+}

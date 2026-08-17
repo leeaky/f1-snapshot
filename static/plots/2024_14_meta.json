@@ -1,0 +1,16 @@
+{
+  "event_name": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "28 July 2024",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "PER",
+      "time": "1:44.701"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:45.563"
+    }
+  ]
+}

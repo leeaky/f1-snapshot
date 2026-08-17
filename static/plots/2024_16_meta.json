@@ -1,0 +1,16 @@
+{
+  "event_name": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "01 September 2024",
+  "winner_name": "Charles Leclerc",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:21.432"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:21.512"
+    }
+  ]
+}

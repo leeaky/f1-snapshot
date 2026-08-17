@@ -1,0 +1,16 @@
+{
+  "event_name": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "15 September 2024",
+  "winner_name": "Oscar Piastri",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:45.255"
+    },
+    {
+      "abbr": "RUS",
+      "time": "1:46.628"
+    }
+  ]
+}

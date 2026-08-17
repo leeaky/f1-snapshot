@@ -1,0 +1,16 @@
+{
+  "event_name": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "24 March 2024",
+  "winner_name": "Carlos Sainz",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:19.813"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:19.915"
+    }
+  ]
+}

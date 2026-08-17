@@ -1,0 +1,16 @@
+{
+  "event_name": "Dutch Grand Prix",
+  "location": "Zandvoort",
+  "date": "25 August 2024",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:13.817"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:13.878"
+    }
+  ]
+}
