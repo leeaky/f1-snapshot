@@ -134,6 +134,22 @@ def plot_speed_traces(session, two_fastest_laps, path: Path) -> None:
     _save(fig, path)
 
 
+def _compound_color(compound: str, session) -> str:
+    """Real compound color, or a neutral fallback for anomalous data.
+
+    Some races have laps recorded with Compound == "NONE" — e.g. a
+    stationary lap during a red flag with no tyre reading (2022 Monaco has
+    several, alongside FastF1's own "fixed incorrect tyre stint" warnings
+    for that race). FastF1's own color lookup raises ValueError for
+    anything outside the real compound set, which would otherwise take the
+    whole chart down over a handful of anomalous laps.
+    """
+    try:
+        return fastf1.plotting.get_compound_color(compound, session=session)
+    except ValueError:
+        return theme.GRID
+
+
 def plot_strategy(session, path: Path) -> None:
     """Horizontal stacked bars of tyre-compound stints, one row per driver, finishing order."""
     laps = session.laps
@@ -152,9 +168,7 @@ def plot_strategy(session, path: Path) -> None:
         driver_stints = stints.loc[stints["Driver"] == driver]
         previous_stint_end = 0
         for _, row in driver_stints.iterrows():
-            compound_color = fastf1.plotting.get_compound_color(
-                row["Compound"], session=session
-            )
+            compound_color = _compound_color(row["Compound"], session)
             ax.barh(
                 y=driver,
                 width=row["StintLength"],
@@ -165,12 +179,14 @@ def plot_strategy(session, path: Path) -> None:
             )
             previous_stint_end += row["StintLength"]
 
+    # Only real compounds belong in the legend — an anomalous "NONE" entry
+    # would read as a mystery fifth tyre choice rather than what it is.
     compounds_used = sorted(
-        stints["Compound"].unique(),
-        key=lambda c: COMPOUND_ORDER.index(c) if c in COMPOUND_ORDER else len(COMPOUND_ORDER),
+        (c for c in stints["Compound"].unique() if c in COMPOUND_ORDER),
+        key=COMPOUND_ORDER.index,
     )
     handles = [
-        plt.Rectangle((0, 0), 1, 1, color=fastf1.plotting.get_compound_color(c, session=session))
+        plt.Rectangle((0, 0), 1, 1, color=_compound_color(c, session))
         for c in compounds_used
     ]
     ax.legend(
