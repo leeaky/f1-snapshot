@@ -70,6 +70,25 @@ jobs:
             git add static/plots/
             if ! git diff --cached --quiet; then
               git commit -m "Sync race data for $year"
-              git push
+
+              # A years-long backfill runs for hours, and this job's own
+              # checkout is only as fresh as when it started — an unrelated
+              # push elsewhere to main (a manual commit, say) in the
+              # meantime makes `git push` reject as non-fast-forward. Rebase
+              # onto whatever's now on the remote before pushing. This job
+              # only ever touches static/plots/, so a genuine conflict here
+              # would be surprising — but if one happens, don't let it take
+              # the rest of the backfill down with it: abort that one
+              # rebase and move on, rather than letting the default
+              # errexit behavior kill the whole step (and every remaining
+              # year) over one bad push.
+              if ! git pull --rebase --autostash; then
+                echo "::warning::Rebase conflict syncing $year — skipping, will retry next run"
+                git rebase --abort
+                continue
+              fi
+              if ! git push; then
+                echo "::warning::Push failed for $year — will retry next run"
+              fi
             fi
           done
