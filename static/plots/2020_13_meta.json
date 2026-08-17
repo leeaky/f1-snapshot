@@ -1,0 +1,16 @@
+{
+  "event_name": "Emilia Romagna Grand Prix",
+  "location": "Imola",
+  "date": "01 November 2020",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:15.484"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:15.902"
+    }
+  ]
+}

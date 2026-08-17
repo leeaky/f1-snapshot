@@ -1,0 +1,16 @@
+{
+  "event_name": "Portuguese Grand Prix",
+  "location": "Portim\u00e3o",
+  "date": "25 October 2020",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:18.750"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:19.345"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "19 July 2020",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:16.627"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:17.665"
+    }
+  ]
+}

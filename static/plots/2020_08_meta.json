@@ -1,0 +1,16 @@
+{
+  "event_name": "Italian Grand Prix",
+  "location": "Monza",
+  "date": "06 September 2020",
+  "winner_name": "Pierre Gasly",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:22.746"
+    },
+    {
+      "abbr": "SAI",
+      "time": "1:23.882"
+    }
+  ]
+}

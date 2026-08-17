@@ -1,0 +1,16 @@
+{
+  "event_name": "Sakhir Grand Prix",
+  "location": "Sakhir",
+  "date": "06 December 2020",
+  "winner_name": "Sergio Perez",
+  "fastest": [
+    {
+      "abbr": "RUS",
+      "time": "0:55.404"
+    },
+    {
+      "abbr": "BOT",
+      "time": "0:56.563"
+    }
+  ]
+}

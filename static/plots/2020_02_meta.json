@@ -1,0 +1,16 @@
+{
+  "event_name": "Styrian Grand Prix",
+  "location": "Spielberg",
+  "date": "12 July 2020",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "SAI",
+      "time": "1:05.619"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:06.145"
+    }
+  ]
+}

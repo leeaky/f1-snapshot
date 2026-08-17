@@ -1,0 +1,16 @@
+{
+  "event_name": "Turkish Grand Prix",
+  "location": "Istanbul",
+  "date": "15 November 2020",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:36.806"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:38.193"
+    }
+  ]
+}

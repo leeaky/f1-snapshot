@@ -1,0 +1,16 @@
+{
+  "event_name": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "05 July 2020",
+  "winner_name": "Valtteri Bottas",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:07.475"
+    },
+    {
+      "abbr": "BOT",
+      "time": "1:07.657"
+    }
+  ]
+}

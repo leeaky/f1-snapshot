@@ -1,0 +1,16 @@
+{
+  "event_name": "70th Anniversary Grand Prix",
+  "location": "Silverstone",
+  "date": "09 August 2020",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:28.451"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:29.465"
+    }
+  ]
+}
