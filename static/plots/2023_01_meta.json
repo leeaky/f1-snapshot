@@ -1,0 +1,16 @@
+{
+  "event_name": "Bahrain Grand Prix",
+  "location": "Sakhir",
+  "date": "05 March 2023",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "ZHO",
+      "time": "1:33.996"
+    },
+    {
+      "abbr": "GAS",
+      "time": "1:35.068"
+    }
+  ]
+}

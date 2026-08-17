@@ -1,0 +1,16 @@
+{
+  "event_name": "Australian Grand Prix",
+  "location": "Melbourne",
+  "date": "08 March 2026",
+  "winner_name": "George Russell",
+  "fastest": [
+    {
+      "abbr": "VER",
+      "time": "1:22.091"
+    },
+    {
+      "abbr": "NOR",
+      "time": "1:22.358"
+    }
+  ]
+}

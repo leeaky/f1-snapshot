@@ -1,0 +1,16 @@
+{
+  "event_name": "Monaco Grand Prix",
+  "location": "Monaco",
+  "date": "29 May 2022",
+  "winner_name": "Sergio Perez",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:14.693"
+    },
+    {
+      "abbr": "TSU",
+      "time": "1:15.334"
+    }
+  ]
+}

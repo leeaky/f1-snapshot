@@ -1,0 +1,16 @@
+{
+  "event_name": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "19 July 2026",
+  "winner_name": "Kimi Antonelli",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:48.890"
+    },
+    {
+      "abbr": "ANT",
+      "time": "1:49.098"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "29 March 2026",
+  "winner_name": "Kimi Antonelli",
+  "fastest": [
+    {
+      "abbr": "ANT",
+      "time": "1:32.432"
+    },
+    {
+      "abbr": "RUS",
+      "time": "1:32.549"
+    }
+  ]
+}
