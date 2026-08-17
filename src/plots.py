@@ -70,7 +70,11 @@ def plot_track_map(session, fastest_lap, path: Path) -> None:
     segment_speed = (speed[:-1] + speed[1:]) / 2
 
     line = LineCollection(
-        segments, cmap=theme.speed_colormap(), norm=Normalize(speed.min(), speed.max())
+        segments,
+        cmap=theme.speed_colormap(),
+        norm=Normalize(speed.min(), speed.max()),
+        capstyle="round",
+        joinstyle="round",
     )
     line.set_array(segment_speed)
     line.set_linewidth(3.2)
