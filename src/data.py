@@ -13,6 +13,7 @@ import logging
 from pathlib import Path
 
 import fastf1
+import numpy as np
 import pandas as pd
 
 logger = logging.getLogger(__name__)
@@ -103,6 +104,50 @@ def pick_two_fastest(session: fastf1.core.Session) -> list[fastf1.core.Lap]:
     return candidates[:2]
 
 
+MAX_PLAUSIBLE_JUMP_RATIO = 50.0  # see _telemetry_is_sane — validated against
+# 5 known-clean races (max observed ratio 12-24, including Monaco's hairpins,
+# the tightest cornering on the calendar) vs one known-corrupted one (172-286),
+# so this sits with a >2x margin above real cornering and >3x below corruption.
+
+
+def _telemetry_is_sane(lap: fastf1.core.Lap) -> bool:
+    """Rejects a lap whose merged position telemetry doesn't agree with
+    itself: how far the car appears to move between consecutive X/Y samples,
+    versus how far the lap's own Distance column says it moved in that same
+    step. A real path can't do the former without the latter following along
+    — cutting a corner makes the XY jump *shorter* than the arc-length
+    Distance delta, never wildly longer.
+
+    Seen so far in 2026 Hungarian GP: car_data and pos_data are independent
+    streams FastF1 interleaves by timestamp (see merge_channels), and for
+    that one session the merge produces stretches where consecutive samples
+    ~0.1-0.2s apart put the car 1-3+ km from where Distance says it should
+    be — every driver in the session. That's a genuine defect in the
+    session's source data, not something a chart can meaningfully draw, and
+    car_data's own resolution degrades alongside it (76% flat consecutive-
+    Speed samples vs ~20% normally) — so this one self-consistency check is
+    used as a proxy for "this lap's telemetry is trustworthy" for both track
+    map and speed trace purposes, rather than a separate heuristic per chart.
+
+    A raw distance-per-time speed check was tried first and rejected: merged
+    timestamps from two independently-sampled streams routinely produce
+    tiny/noisy time gaps even in completely normal laps, making "implied
+    speed" swing wildly on good data (a known-clean race's own points came
+    back with implied speeds up to ~1700 m/s — worse than the corrupted
+    race's). Distance is a within-session cumulative odometer, not a
+    timestamp, so it doesn't inherit that noise.
+    """
+    tel = lap.get_telemetry()
+    if len(tel) < 2:
+        return False
+    xy = tel.loc[:, ("X", "Y")].to_numpy()
+    xy_jump = np.linalg.norm(np.diff(xy, axis=0), axis=1)
+    dist_delta = np.abs(np.diff(tel["Distance"].to_numpy()))
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = np.where(dist_delta > 0.01, xy_jump / dist_delta, 0.0)
+    return bool(np.percentile(ratio, 99) < MAX_PLAUSIBLE_JUMP_RATIO)
+
+
 def pick_fastest_with_telemetry(
     session: fastf1.core.Session, telemetry: dict, count: int
 ) -> list[fastf1.core.Lap]:
@@ -118,13 +163,17 @@ def pick_fastest_with_telemetry(
     pick_two_fastest()'s factual "what really was the fastest lap" — so
     this is the one to use for chart data, not for reporting a time.
 
-    May return fewer than `count` laps if not enough drivers have this
+    Also skips a driver whose telemetry is present but corrupted (see
+    _telemetry_is_sane) — the same "pick the next one" logic covers both
+    a missing stream and a present-but-garbled one.
+
+    May return fewer than `count` laps if not enough drivers have usable
     telemetry; callers already treat that as "can't build this chart" via
     the same fallback path as any other plotting failure.
     """
     candidates = [
         lap for lap in _fastest_laps_by_driver(session)
-        if lap["DriverNumber"] in telemetry
+        if lap["DriverNumber"] in telemetry and _telemetry_is_sane(lap)
     ]
     return candidates[:count]
 
