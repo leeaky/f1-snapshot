@@ -1,0 +1,11 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "f1-snapshot",
+            "runtimeExecutable": ".venv\\Scripts\\python.exe",
+            "runtimeArgs": ["-m", "flask", "--app", "src.app", "run", "--debug"],
+            "port": 5000
+        }
+    ]
+}

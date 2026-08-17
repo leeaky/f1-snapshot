@@ -1,0 +1,6 @@
+fastf1>=3.4
+flask>=3.0
+matplotlib>=3.8
+numpy>=1.26
+pandas>=2.2
+python-dotenv>=1.0

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}F1 Snapshot{% endblock %}</title>
+<meta name="description" content="A visual snapshot of any Formula 1 race since 2018 — track map, fastest laps, tyre strategy, and position changes.">
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <a class="wordmark" href="{{ url_for('index') }}">F1<span>Snapshot</span></a>
+  {% block header_extra %}{% endblock %}
+</header>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <p>Timing data via <a href="https://github.com/theOehrly/Fast-F1" target="_blank" rel="noopener">FastF1</a></p>
+</footer>
+
+<div id="loading-overlay" class="loading-overlay" hidden>
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <p id="loading-text">Loading race data…</p>
+    <p class="loading-hint">First look at a race can take a minute — after that it's instant.</p>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Environment
+.venv/
+config/
+.env
+
+# FastF1 disk cache (large, regenerable)
+cache/
+
+# Generated chart images (regenerable)
+static/plots/*.png
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Editor
+.vscode/*
+!.vscode/settings.json

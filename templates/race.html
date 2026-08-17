@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ event_name }} {{ year }} — F1 Snapshot{% endblock %}
+
+{% block header_extra %}
+<form class="race-picker race-picker--compact" data-race-picker>
+  <select name="year" data-year-select aria-label="Season">
+    {% for y in years %}
+    <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+    {% endfor %}
+  </select>
+  <select name="event" data-event-select aria-label="Grand Prix">
+    <option value="{{ round_number }}" selected>{{ event_name }}</option>
+  </select>
+  <button type="submit" class="btn-secondary" data-submit>Go</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<section class="race-hero">
+  <p class="eyebrow">{{ year }} · Round {{ round_number }}</p>
+  <h1>{{ event_name }}</h1>
+  <p class="race-hero-location">{{ location }} &middot; {{ date }}</p>
+  <div class="stat-row">
+    <div class="stat">
+      <span class="stat-label">Winner</span>
+      <span class="stat-value">{{ winner_name }}</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Fastest lap</span>
+      <span class="stat-value">{{ fastest[0].abbr }} — {{ fastest[0].time }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="chart-section">
+  <p class="eyebrow">Track map</p>
+  <h2>Circuit layout</h2>
+  <p class="section-copy">The lap that set the fastest time of the race, traced corner by corner.</p>
+  <div class="chart-card">
+    <img src="{{ images.track_map }}" alt="Track map of {{ event_name }} with every corner numbered">
+  </div>
+</section>
+
+<section class="chart-section">
+  <p class="eyebrow">Speed traces</p>
+  <h2>The two fastest laps</h2>
+  <p class="section-copy">{{ fastest[0].abbr }} ({{ fastest[0].time }}) vs {{ fastest[1].abbr }} ({{ fastest[1].time }}) — speed compared distance for distance around the lap.</p>
+  <div class="chart-card">
+    <img src="{{ images.speed_traces }}" alt="Speed trace comparison between the two fastest race laps">
+  </div>
+</section>
+
+<section class="chart-section">
+  <p class="eyebrow">Tyre strategy</p>
+  <h2>How everyone got to the flag</h2>
+  <p class="section-copy">Every driver's compound choices and stint lengths, in finishing order.</p>
+  <div class="chart-card chart-card--dense">
+    <img src="{{ images.strategy }}" alt="Tyre strategy chart showing every driver's stints by compound">
+  </div>
+</section>
+
+<section class="chart-section">
+  <p class="eyebrow">Position changes</p>
+  <h2>How the race unfolded</h2>
+  <p class="section-copy">Every position swap, lap by lap, coloured by team.</p>
+  <div class="chart-card chart-card--dense">
+    <img src="{{ images.position_changes }}" alt="Chart of every driver's race position across all laps">
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Couldn't load that race — F1 Snapshot{% endblock %}
+{% block content %}
+<section class="race-hero">
+  <p class="eyebrow">Something went wrong</p>
+  <h1>Couldn't load {{ year }}, round {{ round_number }}</h1>
+  <p class="race-hero-location">This race might not have full timing data available, or the data source is temporarily unreachable. Check the terminal log for details.</p>
+  <a class="btn-primary" href="{{ url_for('index') }}">Back to start</a>
+</section>
+{% endblock %}

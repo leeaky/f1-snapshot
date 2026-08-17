@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}F1 Snapshot — relive any race since 2018{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Relive any race<br>since 2018</h1>
+  <p class="hero-sub">Pick a season and a Grand Prix to see the circuit, the two fastest laps, every tyre strategy, and how the race unfolded — one page per race.</p>
+
+  <form class="race-picker race-picker--hero" data-race-picker>
+    <div class="field">
+      <label for="year">Season</label>
+      <select id="year" name="year" data-year-select>
+        {% for y in years %}<option value="{{ y }}">{{ y }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="event">Grand Prix</label>
+      <select id="event" name="event" data-event-select disabled>
+        <option value="">Loading…</option>
+      </select>
+    </div>
+    <button type="submit" class="btn-primary" data-submit disabled>View snapshot</button>
+  </form>
+</section>
+{% endblock %}

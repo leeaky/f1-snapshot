@@ -1,0 +1,321 @@
+/* F1 Snapshot — cinematic dark theme */
+
+:root {
+  --bg: #0d0d0f;
+  --bg-card: #141416;
+  --red: #e8383a;
+  --red-bright: #ff4b4d;
+  --teal: #2dd4bf;
+  --text: #f5f5f0;
+  --text-muted: #8a8a90;
+  --border: #2a2a2e;
+  --font-display: 'Barlow Condensed', 'Segoe UI', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --max-width: 1100px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% -10%, rgba(232, 56, 58, 0.10), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: var(--teal); }
+
+/* Header */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem clamp(1rem, 4vw, 3rem);
+  background: rgba(13, 13, 15, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.wordmark span { color: var(--red); }
+
+/* Race picker (shared by hero + header forms) */
+
+.race-picker {
+  display: flex;
+  align-items: end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.race-picker--compact { align-items: center; }
+
+.field { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.field label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+select {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  min-width: 10rem;
+}
+
+.race-picker--compact select { min-width: 9rem; padding: 0.4rem 0.6rem; font-size: 0.85rem; }
+
+select:focus-visible { outline: 2px solid var(--teal); outline-offset: 1px; }
+select:disabled { opacity: 0.5; }
+
+.btn-primary, .btn-secondary {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  padding: 0.7rem 1.75rem;
+  font-size: 1rem;
+}
+
+.btn-primary:hover:not(:disabled) { background: var(--red-bright); transform: translateY(-1px); }
+.btn-primary:disabled { background: var(--border); color: var(--text-muted); cursor: not-allowed; }
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+.btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+/* Landing hero */
+
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 10vw, 7rem) clamp(1rem, 4vw, 3rem) 4rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  color: var(--text);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .hero h1 {
+    background: linear-gradient(180deg, var(--text), #b9b9c0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.hero-sub {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+}
+
+.race-picker--hero {
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: inline-flex;
+}
+
+/* Race page hero */
+
+.race-hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem clamp(1rem, 4vw, 3rem) 2rem;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  color: var(--teal);
+  margin: 0 0 0.5rem;
+}
+
+.race-hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+  line-height: 1.05;
+  margin: 0 0 0.6rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid var(--red);
+}
+
+.race-hero-location { color: var(--text-muted); margin: 0 0 1.75rem; }
+
+.stat-row { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+
+.stat-label {
+  display: block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.15rem;
+}
+
+.stat-value { display: block; font-size: 1.4rem; font-weight: 600; }
+
+/* Chart sections */
+
+.chart-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.25rem clamp(1rem, 4vw, 3rem);
+  border-top: 1px solid var(--border);
+}
+
+.chart-section h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  margin: 0 0 0.5rem;
+}
+
+.section-copy { color: var(--text-muted); margin: 0 0 1.5rem; max-width: 42rem; }
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* Strategy + position-changes charts carry ~20 text labels each — below a
+   min-width they'd shrink to unreadable, so the card scrolls instead of the
+   chart shrinking past legibility. */
+.chart-card--dense { overflow-x: auto; }
+.chart-card--dense img { min-width: 640px; width: 100%; }
+
+/* Footer */
+
+.site-footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 2rem 1rem 3rem;
+}
+
+.site-footer a { color: var(--text-muted); }
+
+/* Loading overlay */
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 13, 15, 0.96);
+  z-index: 100;
+}
+
+/* [hidden] and .loading-overlay are equal specificity, so display must only
+   be declared on the :not([hidden]) case — otherwise this rule always wins
+   the source-order tiebreak and the overlay never actually hides. */
+.loading-overlay:not([hidden]) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-content { text-align: center; padding: 0 1.5rem; }
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3px solid var(--border);
+  border-top-color: var(--red);
+  border-radius: 50%;
+  margin: 0 auto 1.25rem;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#loading-text {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem;
+}
+
+.loading-hint { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .site-header { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+  .race-picker--compact { flex-wrap: wrap; }
+  .race-picker--compact select { min-width: 0; flex: 1 1 8rem; }
+
+  .race-picker--hero { display: flex; width: 100%; padding: 1.25rem; }
+  .field { width: 100%; }
+  select { min-width: 0; width: 100%; }
+  .race-picker--hero .btn-primary { width: 100%; }
+
+  .stat-row { gap: 1.5rem; }
+}
