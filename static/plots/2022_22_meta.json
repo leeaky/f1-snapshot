@@ -1,0 +1,16 @@
+{
+  "event_name": "Abu Dhabi Grand Prix",
+  "location": "Yas Island",
+  "date": "20 November 2022",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:28.391"
+    },
+    {
+      "abbr": "RUS",
+      "time": "1:28.836"
+    }
+  ]
+}
