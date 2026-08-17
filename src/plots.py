@@ -16,6 +16,7 @@ import matplotlib
 
 matplotlib.use("Agg")  # must precede any pyplot import; no GUI in a web server
 
+import gc  # noqa: E402
 import logging  # noqa: E402
 from pathlib import Path  # noqa: E402
 
@@ -261,6 +262,28 @@ def plot_position_changes(session, path: Path) -> None:
     _save(fig, path)
 
 
+def _prune_unused_telemetry(session, keep_driver_numbers: set) -> None:
+    """Free car/position telemetry for every driver except the ones used.
+
+    FastF1's Session.load() has no way to request telemetry for only
+    specific drivers — it's all 20 or nothing — but only 1-2 drivers'
+    telemetry is ever actually read across all four charts (the fastest lap
+    for the track map, plus one more for the speed-trace comparison).
+    Measured locally, the full bulk telemetry load accounts for ~230MB of a
+    ~355MB peak for a single race — against Render's free-tier 512MB
+    container limit, with Flask/gunicorn overhead on top of that not even
+    included in the local measurement. session.car_data / session.pos_data
+    are plain dicts keyed by driver number, so once the needed drivers'
+    laps have already pulled their telemetry (a fresh DataFrame each call,
+    not a view into these dicts), the rest can just be dropped.
+    """
+    for store in (session.car_data, session.pos_data):
+        for drv in list(store.keys()):
+            if drv not in keep_driver_numbers:
+                del store[drv]
+    gc.collect()
+
+
 def get_or_create_plots(session, year: int, round_number: int) -> dict[str, Path]:
     """Ensure all four chart images exist for this race, generating any missing.
 
@@ -288,6 +311,9 @@ def get_or_create_plots(session, year: int, round_number: int) -> dict[str, Path
         plot_track_map(session, two_fastest[0], missing["track_map"])
     if "speed_traces" in missing:
         plot_speed_traces(session, two_fastest, missing["speed_traces"])
+    if two_fastest is not None:
+        needed = {lap["DriverNumber"] for lap in two_fastest}
+        _prune_unused_telemetry(session, needed)
     if "strategy" in missing:
         plot_strategy(session, missing["strategy"])
     if "position_changes" in missing:
