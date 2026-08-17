@@ -131,6 +131,34 @@ def plot_track_map(session, fastest_lap, path: Path) -> None:
     _save(fig, path)
 
 
+def _track_map_unavailable(fastest_lap, path: Path) -> None:
+    """Themed placeholder for when position telemetry isn't available.
+
+    Some older sessions are missing position (X/Y) data for at least one
+    driver entirely — car speed/throttle telemetry can be complete while
+    GPS position tracking has gaps, since FastF1 fetches them as separate
+    data streams. When that happens to be the driver FastF1 itself picks
+    as get_circuit_info()'s internal reference lap (its own choice, not
+    configurable), it raises before plot_track_map ever draws anything —
+    for any race that shape of gap hits, not just this one.
+    """
+    fig, ax = plt.subplots(figsize=(9, 6.5))
+    ax.set_title(
+        f"{fastest_lap['Driver']} — {format_laptime(fastest_lap['LapTime'])}",
+        loc="left", color=theme.TEAL, fontsize=13, fontweight="bold", pad=12,
+    )
+    ax.text(
+        0.5, 0.5, "Track map unavailable for this race\n(no position data recorded)",
+        transform=ax.transAxes, ha="center", va="center",
+        color=theme.TEXT_MUTED, fontsize=13, linespacing=1.8,
+    )
+    ax.set_xticks([])
+    ax.set_yticks([])
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    _save(fig, path)
+
+
 def plot_speed_traces(session, two_fastest_laps, path: Path) -> None:
     """Distance vs speed for the two fastest race laps, red vs teal."""
     colors = (theme.RED, theme.TEAL)
@@ -334,7 +362,19 @@ def get_or_create_plots(session, year: int, round_number: int) -> dict[str, Path
         two_fastest = pick_two_fastest(session)
 
     if "track_map" in missing:
-        plot_track_map(session, two_fastest[0], missing["track_map"])
+        try:
+            plot_track_map(session, two_fastest[0], missing["track_map"])
+        except Exception:
+            # Missing position telemetry for FastF1's own internal reference
+            # lap (see _track_map_unavailable) — real, not rare enough to
+            # ignore, and shouldn't take the other three charts down with
+            # it. A themed placeholder still satisfies "this race is fully
+            # cached" so it isn't retried (and re-failed) on every visit.
+            logger.exception(
+                "Track map unavailable for %s round %s, using placeholder",
+                year, round_number,
+            )
+            _track_map_unavailable(two_fastest[0], missing["track_map"])
     if "speed_traces" in missing:
         plot_speed_traces(session, two_fastest, missing["speed_traces"])
     if two_fastest is not None:
