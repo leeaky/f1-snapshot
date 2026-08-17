@@ -1,0 +1,16 @@
+{
+  "event_name": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "26 July 2026",
+  "winner_name": "Lando Norris",
+  "fastest": [
+    {
+      "abbr": "LEC",
+      "time": "1:22.000"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:22.300"
+    }
+  ]
+}

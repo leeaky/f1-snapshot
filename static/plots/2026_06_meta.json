@@ -1,0 +1,16 @@
+{
+  "event_name": "Monaco Grand Prix",
+  "location": "Monte Carlo",
+  "date": "07 June 2026",
+  "winner_name": "Kimi Antonelli",
+  "fastest": [
+    {
+      "abbr": "ANT",
+      "time": "1:13.481"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:14.643"
+    }
+  ]
+}

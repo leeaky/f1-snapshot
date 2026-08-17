@@ -1,0 +1,16 @@
+{
+  "event_name": "Miami Grand Prix",
+  "location": "Miami Gardens",
+  "date": "03 May 2026",
+  "winner_name": "Kimi Antonelli",
+  "fastest": [
+    {
+      "abbr": "NOR",
+      "time": "1:31.869"
+    },
+    {
+      "abbr": "PIA",
+      "time": "1:31.949"
+    }
+  ]
+}

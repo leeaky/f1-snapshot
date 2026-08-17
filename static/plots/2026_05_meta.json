@@ -1,0 +1,16 @@
+{
+  "event_name": "Canadian Grand Prix",
+  "location": "Montr\u00e9al",
+  "date": "24 May 2026",
+  "winner_name": "Kimi Antonelli",
+  "fastest": [
+    {
+      "abbr": "ANT",
+      "time": "1:14.210"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:14.398"
+    }
+  ]
+}

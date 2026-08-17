@@ -1,0 +1,16 @@
+{
+  "event_name": "Chinese Grand Prix",
+  "location": "Shanghai",
+  "date": "15 March 2026",
+  "winner_name": "Kimi Antonelli",
+  "fastest": [
+    {
+      "abbr": "ANT",
+      "time": "1:35.275"
+    },
+    {
+      "abbr": "RUS",
+      "time": "1:35.400"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "event_name": "Barcelona Grand Prix",
+  "location": "Barcelona",
+  "date": "14 June 2026",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "HAM",
+      "time": "1:20.122"
+    },
+    {
+      "abbr": "HAD",
+      "time": "1:20.150"
+    }
+  ]
+}
