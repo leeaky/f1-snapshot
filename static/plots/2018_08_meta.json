@@ -1,0 +1,16 @@
+{
+  "event_name": "French Grand Prix",
+  "location": "Le Castellet",
+  "date": "24 June 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:34.225"
+    },
+    {
+      "abbr": "VER",
+      "time": "1:34.275"
+    }
+  ]
+}

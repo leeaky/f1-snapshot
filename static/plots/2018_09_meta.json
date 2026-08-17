@@ -1,0 +1,16 @@
+{
+  "event_name": "Austrian Grand Prix",
+  "location": "Spielberg",
+  "date": "01 July 2018",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "RAI",
+      "time": "1:06.957"
+    },
+    {
+      "abbr": "VET",
+      "time": "1:07.082"
+    }
+  ]
+}

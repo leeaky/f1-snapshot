@@ -1,0 +1,16 @@
+{
+  "event_name": "Brazilian Grand Prix",
+  "location": "S\u00e3o Paulo",
+  "date": "11 November 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:10.540"
+    },
+    {
+      "abbr": "VET",
+      "time": "1:10.831"
+    }
+  ]
+}

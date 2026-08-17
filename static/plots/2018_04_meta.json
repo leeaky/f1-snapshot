@@ -1,0 +1,16 @@
+{
+  "event_name": "Azerbaijan Grand Prix",
+  "location": "Baku",
+  "date": "29 April 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:45.149"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:45.412"
+    }
+  ]
+}

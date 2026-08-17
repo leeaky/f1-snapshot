@@ -1,0 +1,16 @@
+{
+  "event_name": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "26 August 2018",
+  "winner_name": "Sebastian Vettel",
+  "fastest": [
+    {
+      "abbr": "BOT",
+      "time": "1:46.286"
+    },
+    {
+      "abbr": "VET",
+      "time": "1:46.644"
+    }
+  ]
+}

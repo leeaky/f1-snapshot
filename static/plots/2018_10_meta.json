@@ -1,0 +1,16 @@
+{
+  "event_name": "British Grand Prix",
+  "location": "Silverstone",
+  "date": "08 July 2018",
+  "winner_name": "Sebastian Vettel",
+  "fastest": [
+    {
+      "abbr": "VET",
+      "time": "1:30.696"
+    },
+    {
+      "abbr": "RAI",
+      "time": "1:30.795"
+    }
+  ]
+}

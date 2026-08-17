@@ -1,0 +1,16 @@
+{
+  "event_name": "Spanish Grand Prix",
+  "location": "Barcelona",
+  "date": "13 May 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "RIC",
+      "time": "1:18.441"
+    },
+    {
+      "abbr": "VET",
+      "time": "1:19.128"
+    }
+  ]
+}

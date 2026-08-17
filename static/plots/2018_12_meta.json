@@ -1,0 +1,16 @@
+{
+  "event_name": "Hungarian Grand Prix",
+  "location": "Budapest",
+  "date": "29 July 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "RIC",
+      "time": "1:20.012"
+    },
+    {
+      "abbr": "VET",
+      "time": "1:20.056"
+    }
+  ]
+}

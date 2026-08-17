@@ -1,0 +1,16 @@
+{
+  "event_name": "Singapore Grand Prix",
+  "location": "Singapore",
+  "date": "16 September 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "MAG",
+      "time": "1:41.905"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:42.913"
+    }
+  ]
+}

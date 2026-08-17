@@ -1,0 +1,16 @@
+{
+  "event_name": "Japanese Grand Prix",
+  "location": "Suzuka",
+  "date": "07 October 2018",
+  "winner_name": "Lewis Hamilton",
+  "fastest": [
+    {
+      "abbr": "VET",
+      "time": "1:32.318"
+    },
+    {
+      "abbr": "HAM",
+      "time": "1:32.785"
+    }
+  ]
+}
