@@ -366,6 +366,23 @@ def existing_plot_paths(year: int, round_number: int) -> dict[str, Path] | None:
     paths = {name: _image_path(year, round_number, name) for name in PLOT_NAMES}
     if all(p.exists() for p in paths.values()):
         return paths
+
+
+def cached_races() -> list[tuple[int, int]]:
+    """Every (year, round) with all four images and metadata on disk, sorted.
+
+    The one source of truth for "what races does this site actually have" —
+    both the (now cache-only) web routes and the static-site build use this
+    rather than each re-deriving it, so a race can't show up as selectable
+    in one place and 404 in the other.
+    """
+    races = []
+    for meta_path in PLOTS_DIR.glob("*_meta.json"):
+        year_str, round_str = meta_path.stem.split("_")[:2]
+        year, round_number = int(year_str), int(round_str)
+        if existing_plot_paths(year, round_number) is not None:
+            races.append((year, round_number))
+    return sorted(races)
     return None
 
 

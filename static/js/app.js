@@ -7,7 +7,7 @@
     eventSelect.innerHTML = "<option value=\"\">Loading…</option>";
     if (submitBtn) submitBtn.disabled = true;
 
-    fetch("/api/events/" + year)
+    fetch(window.SITE_ROOT + "/api/events/" + year + ".json")
       .then(function (res) {
         if (!res.ok) throw new Error("Failed to load events (" + res.status + ")");
         return res.json();
@@ -62,7 +62,7 @@
       const round = eventSelect.value;
       if (!year || !round) return;
       showLoadingOverlay();
-      window.location.href = "/race/" + year + "/" + round;
+      window.location.href = window.SITE_ROOT + "/race/" + year + "/" + round + "/";
     });
   });
 })();
