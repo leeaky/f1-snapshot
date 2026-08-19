@@ -3,6 +3,7 @@
 Understand a historical Formula 1 race at a glance: pick a season and a Grand Prix, see the circuit, the two fastest laps of the race, every tyre strategy, and how the whole race unfolded — one page per race, for any Grand Prix since 2018.
 
 **[Live site Github →](https://leeaky.github.io/f1-snapshot/)**
+
 **[Live site Render →](https://f1-snapshot.onrender.com)**
 
 ![Track map, coloured by speed](static/plots/2023_10_track_map.png)
