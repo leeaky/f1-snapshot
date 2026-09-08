@@ -342,9 +342,9 @@ def _prune_unused_telemetry(session, keep_driver_numbers: set) -> None:
     telemetry is ever actually read across all four charts (the fastest lap
     for the track map, plus one more for the speed-trace comparison).
     Measured locally, the full bulk telemetry load accounts for ~230MB of a
-    ~355MB peak for a single race — against Render's free-tier 512MB
-    container limit, with Flask/gunicorn overhead on top of that not even
-    included in the local measurement. session.car_data / session.pos_data
+    ~355MB peak for a single race — which mattered when a live server ran in
+    a ~512MB free-tier container, and still keeps the weekly GitHub Actions
+    sync well within runner limits. session.car_data / session.pos_data
     are plain dicts keyed by driver number, so once the needed drivers'
     laps have already pulled their telemetry (a fresh DataFrame each call,
     not a view into these dicts), the rest can just be dropped.
@@ -475,8 +475,8 @@ def ensure_race_cached(year: int, round_number: int) -> tuple[dict, dict[str, Pa
 
     Cache-first: if everything's already on disk, this is a handful of
     Path.exists()/file reads with no FastF1 involvement at all. Only loads
-    the full race session — the expensive, memory-heavy path that's come
-    close to Render's free-tier limit — when something's actually missing,
+    the full race session — the expensive, memory-heavy path — when
+    something's actually missing,
     and whatever that produces gets cached so it's a one-time cost per
     race, not a per-request one. Shared by the web app and precache.py so
     both stay cache-first the same way, rather than two copies of this

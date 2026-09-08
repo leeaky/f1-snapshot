@@ -1,10 +1,10 @@
 name: Sync race data
 
 # Pre-renders every race's charts + metadata and commits them to the repo,
-# so the deployed site serves them as static files instead of doing a live
-# FastF1 load per request — that live load is the one thing that's come
-# close to Render's free-tier 512MB memory limit. See src/plots.py's
-# ensure_race_cached() for the read side of this.
+# so the static GitHub Pages build serves them as files instead of doing a
+# live FastF1 load per request — that live load was the one thing that ever
+# strained the old free-tier host. See src/plots.py's ensure_race_cached()
+# for the read side of this.
 #
 # Idempotent: a race that's already fully cached is skipped (a couple of
 # Path.exists() checks), so running this repeatedly — every week, or

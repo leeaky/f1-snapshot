@@ -6,9 +6,14 @@ changes — one page per race, built from FastF1 data.
 
 ## Decisions
 
-- **Stack**: Flask (server-rendered), matplotlib for all charts, rendered to static PNGs.
-  Chosen over Streamlit for full design control; chosen over a static site generator so any
-  FastF1-supported race can be selected on demand, not just a pre-built list.
+- **Stack**: Flask + matplotlib, all charts rendered to static PNGs. Chosen over Streamlit
+  for full design control.
+- **Hosting**: static site on GitHub Pages (migrated off Render 2026-08-18). `src/build_site.py`
+  drives Flask's own view functions to render every synced race to files; `deploy-pages.yml`
+  publishes on each push to `main`. Flask (`src/app.py`) is now only the local dev server and
+  the single source of "what a race page looks like" that `build_site.py` reuses — production
+  has no live server and no request-time FastF1. Render's live-fetch fallback was dropped in
+  the same move.
 - **Data scope**: all four visuals come from the **Race** session only (not Qualifying), for
   one consistent "race snapshot". "Two fastest laps" = the two drivers with the quickest
   individual laps in that race (not two arbitrarily chosen drivers).
@@ -21,10 +26,11 @@ changes — one page per race, built from FastF1 data.
   speed traces → strategy → position changes. Chosen over a 2x2 dashboard grid because the
   strategy and position charts need width to stay legible with ~20 drivers. Naturally mobile
   friendly (already one column).
-- **First-load performance**: FastF1 downloads ~50-100MB per race on first fetch (1-3 min),
-  then caches to disk (`cache/`, gitignored) and is near-instant. `src/precache.py` is a CLI to
-  bulk-warm the cache + pre-generate plot images for chosen seasons ahead of time. Uncached
-  races still work live via the Flask route, just slower on that first request.
+- **Sync / caching**: FastF1 downloads ~50-100MB per race on first fetch (1-3 min), then
+  caches to disk (`cache/`, gitignored). A weekly GitHub Actions workflow (`sync-races.yml`)
+  runs `src/precache.py` to pull any un-synced race and commit its PNGs + `_meta.json`.
+  `src/plots.py` `ensure_race_cached()` only touches FastF1 when an artefact is missing.
+  A race that hasn't been synced isn't a page until the next weekly run picks it up.
 
 ## Environment
 

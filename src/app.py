@@ -4,9 +4,10 @@ Thin by design: every route delegates data work to data.py and chart
 generation to plots.py, and just assembles template context.
 
 Cache-only, deliberately: this used to fall back to a live FastF1 load for
-a race that hadn't synced yet, which was the one thing that ever came close
-to Render's free-tier memory limit. Now that the site deploys as a static
-build (see build_site.py) with no live server behind it at all, there's
+a race that hadn't synced yet, which was the one thing that ever risked the
+memory ceiling back when a live server hosted the site. Now that it deploys
+as a static build (see build_site.py) with no live server behind it at all,
+there's
 nowhere for that fallback to run even if it stayed — a race that hasn't
 synced yet just isn't a page until the next weekly sync picks it up. This
 module still doubles as the local dev server (`flask --app src.app run`),

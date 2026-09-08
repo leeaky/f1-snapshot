@@ -2,9 +2,7 @@
 
 Understand a historical Formula 1 race at a glance: pick a season and a Grand Prix, see the circuit, the two fastest laps of the race, every tyre strategy, and how the whole race unfolded — one page per race, for any Grand Prix since 2018.
 
-**[Live site Github →](https://leeaky.github.io/f1-snapshot/)**
-
-**[Live site Render →](https://f1-snapshot.onrender.com)**
+**[Live site →](https://leeaky.github.io/f1-snapshot/)**
 
 ![Track map, coloured by speed](static/plots/2023_10_track_map.png)
 ![Position changes over the course of a race](static/plots/2023_10_position_changes.png)
@@ -18,7 +16,7 @@ Understand a historical Formula 1 race at a glance: pick a season and a Grand Pr
 
 ## How it works
 
-A small Flask app (`src/`) that generates all four charts with matplotlib. Races are pre-rendered rather than computed per request: a scheduled GitHub Actions workflow (`.github/workflows/sync-races.yml`) runs weekly, calls FastF1 for any race that isn't cached yet, and commits the resulting images plus a small metadata file back to the repo. The deployed site (Render, free tier) then serves an already-synced race as static files with no FastF1 involvement at all — a race that's never been synced still works, falling back to a live fetch on the spot.
+A small Flask app (`src/`) generates all four charts with matplotlib. Races are pre-rendered rather than computed per request: a scheduled GitHub Actions workflow (`.github/workflows/sync-races.yml`) runs weekly, calls FastF1 for any race that isn't cached yet, and commits the resulting images plus a small metadata file back to the repo. A second workflow (`deploy-pages.yml`) builds those into a static site with `src/build_site.py` and publishes it to GitHub Pages — no live server, no FastF1 at request time. A race that hasn't been synced yet simply isn't a page until the next weekly sync picks it up.
 
 ## Running locally
 
