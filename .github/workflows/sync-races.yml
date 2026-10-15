@@ -48,21 +48,37 @@ jobs:
       - name: Determine years to sync
         id: years
         shell: bash
+        # The manual input reaches the script as an environment variable, never
+        # pasted into the script text, so it can't be run as shell code. Each
+        # entry must also be a plain year from 2018 to the current one, or the
+        # run stops before doing anything.
+        env:
+          YEARS_INPUT: ${{ github.event.inputs.years }}
         run: |
-          if [ -n "${{ github.event.inputs.years }}" ]; then
-            echo "list=${{ github.event.inputs.years }}" >> "$GITHUB_OUTPUT"
+          current_year=$(date -u +%Y)
+          if [ -n "$YEARS_INPUT" ]; then
+            list=""
+            for y in $YEARS_INPUT; do
+              if ! [[ "$y" =~ ^[0-9]{4}$ ]] || (( y < 2018 || y > current_year )); then
+                echo "::error::Invalid year '$y' — use space-separated years from 2018 to $current_year"
+                exit 1
+              fi
+              list="$list $y"
+            done
+            echo "list=${list# }" >> "$GITHUB_OUTPUT"
           else
-            current_year=$(date -u +%Y)
             echo "list=$(seq 2018 "$current_year" | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Precache each year, committing progress as it goes
         shell: bash
+        env:
+          YEARS: ${{ steps.years.outputs.list }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          for year in ${{ steps.years.outputs.list }}; do
+          for year in $YEARS; do
             echo "::group::Year $year"
             python -m src.precache "$year" || echo "::warning::$year had failures — will retry next run"
             echo "::endgroup::"
