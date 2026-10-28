@@ -1,0 +1,16 @@
+{
+  "event_name": "Belgian Grand Prix",
+  "location": "Spa-Francorchamps",
+  "date": "29 August 2021",
+  "winner_name": "Max Verstappen",
+  "fastest": [
+    {
+      "abbr": "MAZ",
+      "time": "3:18.016"
+    },
+    {
+      "abbr": "STR",
+      "time": "3:18.033"
+    }
+  ]
+}
