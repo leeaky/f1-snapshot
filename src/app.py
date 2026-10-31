@@ -9,7 +9,7 @@ memory ceiling back when a live server hosted the site. Now that it deploys
 as a static build (see build_site.py) with no live server behind it at all,
 there's
 nowhere for that fallback to run even if it stayed — a race that hasn't
-synced yet just isn't a page until the next weekly sync picks it up. This
+synced yet just isn't a page (and the site is frozen — see context.md). This
 module still doubles as the local dev server (`flask --app src.app run`),
 so it's worth keeping fast and simple: every route here is exactly what
 build_site.py drives directly to produce the static output, not two

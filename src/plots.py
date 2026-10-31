@@ -343,8 +343,8 @@ def _prune_unused_telemetry(session, keep_driver_numbers: set) -> None:
     for the track map, plus one more for the speed-trace comparison).
     Measured locally, the full bulk telemetry load accounts for ~230MB of a
     ~355MB peak for a single race — which mattered when a live server ran in
-    a ~512MB free-tier container, and still keeps the weekly GitHub Actions
-    sync well within runner limits. session.car_data / session.pos_data
+    a ~512MB free-tier container, and still keeps a precache run light.
+    session.car_data / session.pos_data
     are plain dicts keyed by driver number, so once the needed drivers'
     laps have already pulled their telemetry (a fresh DataFrame each call,
     not a view into these dicts), the rest can just be dropped.

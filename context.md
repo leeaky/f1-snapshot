@@ -27,10 +27,14 @@ changes — one page per race, built from FastF1 data.
   strategy and position charts need width to stay legible with ~20 drivers. Naturally mobile
   friendly (already one column).
 - **Sync / caching**: FastF1 downloads ~50-100MB per race on first fetch (1-3 min), then
-  caches to disk (`cache/`, gitignored). A weekly GitHub Actions workflow (`sync-races.yml`)
-  runs `src/precache.py` to pull any un-synced race and commit its PNGs + `_meta.json`.
-  `src/plots.py` `ensure_race_cached()` only touches FastF1 when an artefact is missing.
-  A race that hasn't been synced isn't a page until the next weekly run picks it up.
+  caches to disk (`cache/`, gitignored). `src/precache.py` pulls any un-synced race and writes
+  its PNGs + `_meta.json`; `src/plots.py` `ensure_race_cached()` only touches FastF1 when an
+  artefact is missing.
+- **Frozen (2026-10-31)**: from ~15 Oct 2026 F1 requires a paid F1 TV subscription for its
+  timing archive (FastF1 issue #978). Rather than pay, the site is frozen at the 2026 Dutch GP
+  (round 12): the weekly `sync-races.yml` workflow was deleted (it also reported success while
+  failing), and the site footer says why coverage ends. `src/precache.py` still works locally
+  for older seasons the free FastF1 mirror holds.
 
 ## Environment
 

@@ -16,7 +16,9 @@ Understand a historical Formula 1 race at a glance: pick a season and a Grand Pr
 
 ## How it works
 
-A small Flask app (`src/`) generates all four charts with matplotlib. Races are pre-rendered rather than computed per request: a scheduled GitHub Actions workflow (`.github/workflows/sync-races.yml`) runs weekly, calls FastF1 for any race that isn't cached yet, and commits the resulting images plus a small metadata file back to the repo. A second workflow (`deploy-pages.yml`) builds those into a static site with `src/build_site.py` and publishes it to GitHub Pages — no live server, no FastF1 at request time. A race that hasn't been synced yet simply isn't a page until the next weekly sync picks it up.
+A small Flask app (`src/`) generates all four charts with matplotlib. Races are pre-rendered rather than computed per request: `src/precache.py` calls FastF1 for any race that isn't cached yet and writes the resulting images plus a small metadata file into the repo. A GitHub Actions workflow (`deploy-pages.yml`) builds those into a static site with `src/build_site.py` and publishes it to GitHub Pages — no live server, no FastF1 at request time.
+
+**Frozen since 31 October 2026.** Coverage ends with the 2026 Dutch Grand Prix: from October 2026 F1's timing data requires a paid F1 TV subscription, so the weekly sync was switched off rather than paid for.
 
 ## Running locally
 
