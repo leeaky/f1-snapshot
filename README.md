@@ -1,6 +1,8 @@
 # F1 Snapshot
 
-Understand a historical Formula 1 race at a glance: pick a season and a Grand Prix, see the circuit, the two fastest laps of the race, every tyre strategy, and how the whole race unfolded — one page per race, for any Grand Prix since 2018.
+Understand a historical Formula 1 race at a glance: pick a season and a Grand Prix, see the circuit, the two fastest laps of the race, every tyre strategy, and how the whole race unfolded — one page per race, for every Grand Prix from 2018 to the 2026 Dutch Grand Prix.
+
+**Frozen since 31 October 2026.** Coverage ends with the 2026 Dutch Grand Prix: from October 2026 F1's timing data requires a paid F1 TV subscription, so the weekly sync was switched off rather than paid for.
 
 **[Live site →](https://leeaky.github.io/f1-snapshot/)**
 
@@ -17,8 +19,6 @@ Understand a historical Formula 1 race at a glance: pick a season and a Grand Pr
 ## How it works
 
 A small Flask app (`src/`) generates all four charts with matplotlib. Races are pre-rendered rather than computed per request: `src/precache.py` calls FastF1 for any race that isn't cached yet and writes the resulting images plus a small metadata file into the repo. A GitHub Actions workflow (`deploy-pages.yml`) builds those into a static site with `src/build_site.py` and publishes it to GitHub Pages — no live server, no FastF1 at request time.
-
-**Frozen since 31 October 2026.** Coverage ends with the 2026 Dutch Grand Prix: from October 2026 F1's timing data requires a paid F1 TV subscription, so the weekly sync was switched off rather than paid for.
 
 ## Running locally
 
