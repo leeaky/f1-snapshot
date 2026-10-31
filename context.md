@@ -17,7 +17,7 @@ changes — one page per race, built from FastF1 data.
 - **Data scope**: all four visuals come from the **Race** session only (not Qualifying), for
   one consistent "race snapshot". "Two fastest laps" = the two drivers with the quickest
   individual laps in that race (not two arbitrarily chosen drivers).
-- **Year range**: 2018–present. FastF1 telemetry is unreliable before 2018, so the UI never
+- **Year range**: 2018 to the 2026 Dutch GP (frozen). FastF1 telemetry is unreliable before 2018, so the UI never
   offers earlier years rather than handling a missing-data error state.
 - **Visual design**: "cinematic dark" — near-black canvas (`#0d0d0f`), bold red primary
   (`#e8383a`), teal/cyan accent (`#2dd4bf`), condensed broadcast-graphics typography. Chosen
@@ -34,7 +34,12 @@ changes — one page per race, built from FastF1 data.
   timing archive (FastF1 issue #978). Rather than pay, the site is frozen at the 2026 Dutch GP
   (round 12): the weekly `sync-races.yml` workflow was deleted (it also reported success while
   failing), and the site footer says why coverage ends. `src/precache.py` still works locally
-  for older seasons the free FastF1 mirror holds.
+  for older seasons the free FastF1 mirror holds. `fastf1` is pinned to 3.9.0 (what the last
+  green deploy installed) so the build can't drift.
+- **Missing races (2026-11-01)**: a race FastF1's free sources can't supply gets a "no data"
+  page (meta file with `"no_data": true`, no images) rather than a gap — the 2018 Italian GP.
+- **F1 terms (2026-11-01)**: the site stays up until F1 asks for it to be taken down. Owner's
+  view: it was well within FastF1's terms of use when built, and there's no ad revenue.
 
 ## Environment
 

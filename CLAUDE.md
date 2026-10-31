@@ -3,8 +3,8 @@
 ## What this is
 
 Personal website: understand a historical F1 race at a glance — track map, the two
-fastest laps' speed traces, tyre strategy, position changes. One page per race, any
-Grand Prix since 2018. Flask app that pre-renders races to static PNGs; deployed to
+fastest laps' speed traces, tyre strategy, position changes. One page per race, every
+Grand Prix from 2018 to the 2026 Dutch GP. Flask app that pre-renders races to static PNGs; deployed to
 GitHub Pages. Live: https://leeaky.github.io/f1-snapshot/
 
 ## Stack
@@ -30,7 +30,8 @@ always runs `flask run`.
 
 ## Conventions / watch out for
 
-- All four visuals come from the **Race** session only, 2018+. "Two fastest laps" = the two drivers with the quickest individual laps in that race.
+- A race with no usable data gets a `static/plots/<year>_<round>_meta.json` with `"no_data": true` and no images; it renders `templates/race_no_data.html` (only the 2018 Italian GP so far).
+- All four visuals come from the **Race** session only, 2018 to the 2026 Dutch GP. "Two fastest laps" = the two drivers with the quickest individual laps in that race.
 - Visual design is fixed: cinematic dark (`#0d0d0f` canvas, `#e8383a` red, `#2dd4bf` teal), broadcast-graphics type.
 - FastF1 caches aggressively and does **not** auto-pick-up upstream fixes. A corrupt session (see the 2026 Hungarian GP) stays corrupt until F1 republishes it — `data.py._telemetry_is_sane` (`MAX_PLAUSIBLE_JUMP_RATIO = 50`) rejects bad laps and the UI degrades gracefully. Re-check with `python scripts/audit_telemetry.py <year> <round> --renew`.
 - `cache/` (FastF1) and `static/plots/` (generated) are gitignored / data-only.

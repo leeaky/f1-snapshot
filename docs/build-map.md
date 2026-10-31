@@ -26,6 +26,7 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
 |---|---|---|
 | 1 | Sync stops | — |
 | 2 | Site says it's frozen | 1 |
+| 3 | Loose ends | 2 |
 
 ## Stages
 
@@ -54,7 +55,7 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
 - **Depends on:** Stage 1 (ships in the same PR)
 - **Produces:** a live site that is honest about being frozen.
 - **Terms:** none
-- **Status:** in progress
+- **Status:** done
 - **Tasks:**
   - [x] (a) Add a frozen-coverage line to the site footer.
     Detail: `templates/base.html` footer: "Coverage ends with the 2026 Dutch Grand Prix — F1's timing data now requires a paid F1 TV subscription, so this site is no longer updated."
@@ -64,7 +65,7 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
     Detail: `python -m src.build_site`, then search `dist/` for the footer line on the 2026 round 12 page; render locally with `flask run` and open it.
   - [x] (d) Deploy (owner): merge the PR (same one as Stage 1), open the live site.
     Detail: the "Deploy to GitHub Pages" run must be green; on https://leeaky.github.io/f1-snapshot/ the footer shows the new line and the 2026 season still lists rounds 1–12.
-  - [ ] (e) README opening line, the site's search description, and the home page title and headline say where coverage ends.
+  - [x] (e) README opening line, the site's search description, and the home page title and headline say where coverage ends.
     Detail: cherry-picked onto `freeze-followup` (PR #2 was merged before these two commits were pushed): `README.md` opening + freeze note moved up; `templates/base.html` meta description; `templates/index.html` `<title>` (owner, 2026-11-01: "Yes, add it"). Built 2026-11-01: `dist/index.html` title reads "F1 Snapshot — relive any race from 2018 to the 2026 Dutch GP". Headline `<h1>` "Relive any race / 2018–2026" (owner, 2026-11-01: "Change headline too"); `flask run` home page at desktop and 375px wide: fits on two lines, no console errors. Owner merges the follow-up PR; live `<meta name="description">` should read "from 2018 to the 2026 Dutch Grand Prix".
 - **How we know:** the live site footer shows the coverage line on the home page and the 2026 Dutch GP page, and 2026 still shows 12 races.
 - **Issues:** none
@@ -73,6 +74,30 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
 - **Changed:** 2026-11-01 — owner: "Stop it". The audit gate no longer applies once frozen: it guards newly synced data and `--renew` re-checks, and neither happens without a paid account; this change touches no data or chart code. Re-run stopped unfinished. Owner, 2026-11-01: "Yes, drop it" — audit line removed from CLAUDE.md's Definition of done.
 - **Verified:** 2026-11-01 — live site after PR #2: footer line present on https://leeaky.github.io/f1-snapshot/ and /race/2026/12/; the 2026 race list has 12 entries, ending with the Dutch Grand Prix. Live meta description still the old "since 2018" one until task (e) merges.
 - **Changed:** 2026-11-01 — owner: "Yes, fix it" (README opening, then meta description) → task (e).
+- **Verified:** 2026-11-01 — owner merged PR #3 (merge commit `f0046b0`, includes `296060a`); "Deploy to GitHub Pages" on `f0046b0` completed, success. Live https://leeaky.github.io/f1-snapshot/: title "F1 Snapshot — relive any race from 2018 to the 2026 Dutch GP", headline "Relive any race / 2018–2026", meta description "…from 2018 to the 2026 Dutch Grand Prix…". Owner: "all good".
+
+### Stage 3 — Loose ends
+- **What gets built:** the 2018 Italian GP gets a page that says there's no data for it; the FastF1 version is fixed so every machine uses the same one; every "since 2018" wording becomes "2018 to the 2026 Dutch GP"; the decision on F1's terms is written down.
+- **Why:** the follow-ups listed at the end of Stage 2. Owner, 2026-11-01: "fix all of the above - put a "no info" page for 2018 italian GP"; on terms: "Will let up until F1 says to take down."
+- **Depends on:** Stage 2
+- **Produces:** no gap in the 2018 season list, and docs that match the frozen site.
+- **Terms:** version pin (telling the installer to use one exact version of a library instead of "this or newer")
+- **Status:** in progress
+- **Changed:** 2026-11-01 — added after sign-off at the owner's request.
+- **Tasks:**
+  - [x] (a) Add a "no data" page for the 2018 Italian GP that still shows the race name, date and winner.
+    Detail: `static/plots/2018_14_meta.json` with `"no_data": true` (no images); `plots.cached_races()` includes no-data races; `app.race()` renders new `templates/race_no_data.html`; `scripts/audit_telemetry.py` skips no-data races (nothing to audit).
+  - [x] (b) Fix the FastF1 version so the website build always installs the same one.
+    Detail: `requirements.txt` `fastf1>=3.4` → `fastf1==3.9.0` (what the last green deploy installed); install into `.venv` and rebuild.
+  - [x] (c) Replace the remaining "since 2018" wording and record the terms decision.
+    Detail: `CLAUDE.md` lines 7 and 33 (+ a note on no-data races), `context.md` Year range + new decisions "Missing races", "F1 terms", and the pin.
+  - [x] (d) Build the site locally and check the 2018 Italian GP page and the 2018 race list.
+    Detail: `python -m src.build_site`; `flask run` → /race/2018/14/, 2018 list has 21 races.
+  - [ ] (e) Deploy (owner): merge the PR, open the live 2018 Italian GP page.
+    Detail: "Deploy to GitHub Pages" green; https://leeaky.github.io/f1-snapshot/race/2018/14/ shows the no-data page.
+- **How we know:** the live 2018 season lists 21 races instead of 20, and /race/2018/14/ shows the no-data page instead of "page not found".
+- **Issues:** none
+- **Verified:** 2026-11-01 — `pip install -r requirements.txt`: `.venv` now FastF1 3.9.0. `python -m src.build_site`: exit 0, 185 race pages (was 184); `dist/race/2018/14/index.html` exists; `dist/api/events/2018.json` lists 21 races incl. Italian Grand Prix. `flask run`: /race/2018/14/ shows name, Monza · 02 September 2018, winner Lewis Hamilton, "No charts for this race"; /race/2018/13/ still shows its 4 charts; no console errors. Audit race list: 184 races, 2018 r14 excluded. Search for "since 2018" outside data/docs: no matches.
 
 ## Blocks
 

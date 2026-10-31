@@ -375,12 +375,16 @@ def cached_races() -> list[tuple[int, int]]:
     both the (now cache-only) web routes and the static-site build use this
     rather than each re-deriving it, so a race can't show up as selectable
     in one place and 404 in the other.
+
+    Also includes races whose meta is marked "no_data" (no images, by
+    design) — they get a "no data for this race" page instead of a gap.
     """
     races = []
     for meta_path in PLOTS_DIR.glob("*_meta.json"):
         year_str, round_str = meta_path.stem.split("_")[:2]
         year, round_number = int(year_str), int(round_str)
-        if existing_plot_paths(year, round_number) is not None:
+        if (existing_plot_paths(year, round_number) is not None
+                or (load_meta(year, round_number) or {}).get("no_data")):
             races.append((year, round_number))
     return sorted(races)
     return None
