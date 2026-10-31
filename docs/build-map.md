@@ -35,17 +35,18 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
 - **Depends on:** nothing
 - **Produces:** a repo whose only GitHub job is publishing the site.
 - **Terms:** workflow (a script GitHub runs for you, on a schedule or when code changes)
-- **Status:** in progress
+- **Status:** done
 - **Tasks:**
   - [x] (a) Remove the weekly sync job.
     Detail: delete `.github/workflows/sync-races.yml` (see Q1). `deploy-pages.yml` untouched. `src/precache.py` stays for local use.
   - [x] (b) Update the project notes so they no longer describe a weekly sync.
     Detail: `CLAUDE.md` (Commands/Conventions CI line), `README.md` "How it works", `context.md` Decisions → new "Frozen 2026-10-31" decision under Sync / caching. Also stale comments in `.gitignore`, `src/app.py`, `src/plots.py`, `deploy-pages.yml` (comment only, no behaviour change).
-  - [ ] (c) Deploy (owner): merge the PR, then check the Actions tab.
+  - [x] (c) Deploy (owner): merge the PR, then check the Actions tab.
     Detail: look for "Sync race data" gone from the workflow list; "Deploy to GitHub Pages" run on the merge is green.
 - **How we know:** after the merge, the Actions tab lists 1 workflow instead of 2, and no run appears on Wednesday 2026-11-04.
 - **Issues:** none
 - **Verified:** 2026-10-31 — `git rm .github/workflows/sync-races.yml` then listing `.github/workflows`: only `deploy-pages.yml` left (on branch `freeze-site`, not merged)
+- **Verified:** 2026-11-01 — owner merged PR #2 (merge commit `5c99b0b`, 2026-10-31 16:13 UTC). `gh workflow list`: only "Deploy to GitHub Pages" active. `gh run list`: "Deploy to GitHub Pages" on `5c99b0b` completed, success. The Wednesday 2026-11-04 check can't fail now that the workflow no longer exists.
 
 ### Stage 2 — Site says it's frozen
 - **What gets built:** a line on every page saying coverage ends with the 2026 Dutch GP and why; the "page not found" message stops promising weekly updates.
@@ -61,13 +62,17 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
     Detail: `templates/error.html` line 7.
   - [x] (c) Build the site locally and check the new text appears on a real race page.
     Detail: `python -m src.build_site`, then search `dist/` for the footer line on the 2026 round 12 page; render locally with `flask run` and open it.
-  - [ ] (d) Deploy (owner): merge the PR (same one as Stage 1), open the live site.
+  - [x] (d) Deploy (owner): merge the PR (same one as Stage 1), open the live site.
     Detail: the "Deploy to GitHub Pages" run must be green; on https://leeaky.github.io/f1-snapshot/ the footer shows the new line and the 2026 season still lists rounds 1–12.
+  - [ ] (e) README opening line and the site's search description say where coverage ends.
+    Detail: cherry-picked onto `freeze-followup` (PR #2 was merged before these two commits were pushed): `README.md` opening + freeze note moved up; `templates/base.html` meta description. Owner merges the follow-up PR; live `<meta name="description">` should read "from 2018 to the 2026 Dutch Grand Prix".
 - **How we know:** the live site footer shows the coverage line on the home page and the 2026 Dutch GP page, and 2026 still shows 12 races.
 - **Issues:** none
 - **Verified:** 2026-10-31 — `python -m src.build_site`: built 184 race pages + 9 event lists; footer line found in 186 of 186 HTML files; 12 race pages for 2026. `flask run`: /race/2026/12 shows the footer line, no console errors; /race/2026/13 shows the new "coverage ends" message. Live site not yet checked (needs merge).
 - **Verified:** 2026-10-31 — `python scripts/audit_telemetry.py`: exit 1, "184 audited | 0 corrupt | 1 degraded | 109 errored". All 109 errors are `RateLimitExceededError: any API: 500 calls/h` (FastF1's hourly call limit), not bad data; the degraded one is 2019 r5 (1/20 drivers), already known to the audit. Gate not passed.
 - **Changed:** 2026-11-01 — owner: "Stop it". The audit gate no longer applies once frozen: it guards newly synced data and `--renew` re-checks, and neither happens without a paid account; this change touches no data or chart code. Re-run stopped unfinished. Owner, 2026-11-01: "Yes, drop it" — audit line removed from CLAUDE.md's Definition of done.
+- **Verified:** 2026-11-01 — live site after PR #2: footer line present on https://leeaky.github.io/f1-snapshot/ and /race/2026/12/; the 2026 race list has 12 entries, ending with the Dutch Grand Prix. Live meta description still the old "since 2018" one until task (e) merges.
+- **Changed:** 2026-11-01 — owner: "Yes, fix it" (README opening, then meta description) → task (e).
 
 ## Blocks
 
