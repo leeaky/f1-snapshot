@@ -82,7 +82,7 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
 - **Depends on:** Stage 2
 - **Produces:** no gap in the 2018 season list, and docs that match the frozen site.
 - **Terms:** version pin (telling the installer to use one exact version of a library instead of "this or newer")
-- **Status:** in progress
+- **Status:** done
 - **Changed:** 2026-11-01 — added after sign-off at the owner's request.
 - **Tasks:**
   - [x] (a) Add a "no data" page for the 2018 Italian GP that still shows the race name, date and winner.
@@ -93,11 +93,12 @@ Two moving parts today: a weekly GitHub job that fetches new races and saves the
     Detail: `CLAUDE.md` lines 7 and 33 (+ a note on no-data races), `context.md` Year range + new decisions "Missing races", "F1 terms", and the pin.
   - [x] (d) Build the site locally and check the 2018 Italian GP page and the 2018 race list.
     Detail: `python -m src.build_site`; `flask run` → /race/2018/14/, 2018 list has 21 races.
-  - [ ] (e) Deploy (owner): merge the PR, open the live 2018 Italian GP page.
+  - [x] (e) Deploy (owner): merge the PR, open the live 2018 Italian GP page.
     Detail: "Deploy to GitHub Pages" green; https://leeaky.github.io/f1-snapshot/race/2018/14/ shows the no-data page.
 - **How we know:** the live 2018 season lists 21 races instead of 20, and /race/2018/14/ shows the no-data page instead of "page not found".
 - **Issues:** none
 - **Verified:** 2026-11-01 — `pip install -r requirements.txt`: `.venv` now FastF1 3.9.0. `python -m src.build_site`: exit 0, 185 race pages (was 184); `dist/race/2018/14/index.html` exists; `dist/api/events/2018.json` lists 21 races incl. Italian Grand Prix. `flask run`: /race/2018/14/ shows name, Monza · 02 September 2018, winner Lewis Hamilton, "No charts for this race"; /race/2018/13/ still shows its 4 charts; no console errors. Audit race list: 184 races, 2018 r14 excluded. Search for "since 2018" outside data/docs: no matches.
+- **Verified:** 2026-10-31 — owner merged PR #4 (merge commit `61170a3`); "Deploy to GitHub Pages" on `61170a3` completed, success. Live `api/events/2018.json`: 21 races; live /race/2018/14/: status 200, shows "02 September 2018", "Lewis Hamilton", "No charts for this race". Owner's screenshot of the live home page: 2018 dropdown lists 21 races incl. Italian Grand Prix (first showed 20 — the browser's 10-minute cached copy of the old list, `Cache-Control: max-age=600`; not a site bug).
 
 ## Blocks
 
