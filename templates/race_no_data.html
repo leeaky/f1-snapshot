@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ event_name }} {{ year }} — F1 Snapshot{% endblock %}
+
+{% block header_extra %}
+<form class="race-picker race-picker--compact" data-race-picker>
+  <select name="year" data-year-select aria-label="Season">
+    {% for y in years %}
+    <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+    {% endfor %}
+  </select>
+  <select name="event" data-event-select aria-label="Grand Prix">
+    <option value="{{ round_number }}" selected>{{ event_name }}</option>
+  </select>
+  <button type="submit" class="btn-secondary" data-submit>Go</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<section class="race-hero">
+  <p class="eyebrow">{{ year }} · Round {{ round_number }}</p>
+  <h1>{{ event_name }}</h1>
+  <p class="race-hero-location">{{ location }} &middot; {{ date }}</p>
+  <div class="stat-row">
+    <div class="stat">
+      <span class="stat-label">Winner</span>
+      <span class="stat-value">{{ winner_name }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="chart-section">
+  <p class="eyebrow">No data</p>
+  <h2>No charts for this race</h2>
+  <p class="section-copy">The timing and telemetry data for this race isn't available from FastF1's free sources, so there's no track map, speed traces, tyre strategy or position chart.</p>
+</section>
+{% endblock %}

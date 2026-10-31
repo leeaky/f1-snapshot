@@ -61,12 +61,16 @@ def _iter_processed_races() -> list[tuple[int, int]]:
 
     Mirrors plots.cached_races() but without the "all four PNGs present"
     gate: a race whose charts were skipped for corrupt telemetry still has
-    a meta file and is exactly what we want to keep auditing.
+    a meta file and is exactly what we want to keep auditing. Skips "no_data"
+    placeholders — there's no telemetry to audit.
     """
     races = []
     for meta_path in data.PLOTS_DIR.glob("*_meta.json"):
         year_str, round_str = meta_path.stem.split("_")[:2]
-        races.append((int(year_str), int(round_str)))
+        year, round_number = int(year_str), int(round_str)
+        if (data.load_meta(year, round_number) or {}).get("no_data"):
+            continue
+        races.append((year, round_number))
     return sorted(races)
 
 

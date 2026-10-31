@@ -87,6 +87,16 @@ def api_events(year: int):
 
 @app.route("/race/<int:year>/<int:round_number>/")
 def race(year: int, round_number: int):
+    no_data_meta = load_meta(year, round_number)
+    if no_data_meta and no_data_meta.get("no_data"):
+        return render_template(
+            "race_no_data.html",
+            years=_selectable_years(),
+            year=year,
+            round_number=round_number,
+            **no_data_meta,
+        )
+
     image_paths = plots.existing_plot_paths(year, round_number)
     meta = load_meta(year, round_number) if image_paths is not None else None
     if image_paths is None or meta is None:
